@@ -142,7 +142,7 @@ public class EngineeringController {
         modelAndView.addObject("inspectors", userService.getInspectors());
 
 
-        scheduledApplication.setStep(2);
+        scheduledApplication.setStep(3);
         scheduledApplication.setStatus("inspecting");
         scheduledApplication.setInspectorName(userService.findUserByUserId(scheduledApplication.getInspectorId()).getFirstName() + userService.findUserByUserId(scheduledApplication.getInspectorId()).getLastName());
 
@@ -180,7 +180,7 @@ public class EngineeringController {
         modelAndView.addObject("inspectors", userService.getInspectors());
 
 
-        scheduledApplication.setStep(2);
+        scheduledApplication.setStep(3);
         scheduledApplication.setStatus("inspecting");
         scheduledApplication.setInspectorName(userService.findUserByUserId(scheduledApplication.getInspectorId()).getFirstName() + userService.findUserByUserId(scheduledApplication.getInspectorId()).getLastName());
 
@@ -294,16 +294,6 @@ public class EngineeringController {
             fees.setOthers3Date(null);
         if(fees.getOthers4Date().isEmpty())
             fees.setOthers4Date(null);
-        if(fees.getBarangayClearanceVerifier().isEmpty())
-            fees.setBarangayClearanceVerifier(null);
-        if(fees.getLocationClearanceVerifier().isEmpty())
-            fees.setLocationClearanceVerifier(null);
-        if(fees.getHealthClearanceVerifier().isEmpty())
-            fees.setHealthClearanceVerifier(null);
-        if(fees.getOccupancyPermitVerifier().isEmpty())
-            fees.setOccupancyPermitVerifier(null);
-        if(fees.getFireSafetyClearanceVerifier().isEmpty())
-            fees.setFireSafetyClearanceVerifier(null);
 
         feesService.saveFees(fees);
 
@@ -326,7 +316,7 @@ public class EngineeringController {
         User user = userService.findUserByUserId(curUserId);
 
         BPApplication app = applicationService.findByIdNumber(appId);
-        app.setStep(4);
+        app.setStep(5);
 
         applicationService.createNewApplication(app);
 

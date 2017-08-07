@@ -79,7 +79,7 @@ public class TreasuryController {
         Fees fees = feesService.findByAppId(appId);
         BPApplication app = applicationService.findByIdNumber(appId);
 
-        app.setStep(5);
+        app.setStep(6);
 
         applicationService.createNewApplication(app);
 

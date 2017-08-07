@@ -27,43 +27,43 @@ public interface ApplicationRepository extends CrudRepository<BPApplication, Int
 
     @Query("SELECT a " +
             "from BPApplication a " +
-            "where a.step > 1 AND a.step <> 6" +
+            "where a.step > 1 AND a.step <> 7" +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> findProcessingApplications();
 
     @Query("SELECT a " +
             "from BPApplication a " +
-            "where a.step = 2 " +
+            "where a.step = 3 " +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> findInspectingApplications();
 
     @Query("SELECT a " +
             "from BPApplication a " +
-            "where a.step = 3 " +
+            "where a.step = 4 " +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> findInspectedApplications();
 
     @Query("SELECT a " +
             "from BPApplication a " +
-            "where a.inspectorId = :id and (a.step = 3 or a.step = 2)" +
+            "where a.inspectorId = :id and (a.step = 4 or a.step = 3)" +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> findByInspectorId(@Param("id") Integer id);
 
     @Query("SELECT a " +
             "from BPApplication a " +
-            "where a.step = 4 " +
+            "where a.step = 5 " +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> findTreasuryApplications();
 
     @Query("SELECT a " +
             "from BPApplication a " +
-            "where a.step = 5 " +
+            "where a.step = 6 " +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> getReadyForPaymentApplications();
 
     @Query("SELECT a " +
             "from BPApplication a " +
-            "where a.step = 6 " +
+            "where a.step = 7 or a.status = 'renewal' " +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> getApprovedApplications();
 
@@ -87,7 +87,7 @@ public interface ApplicationRepository extends CrudRepository<BPApplication, Int
 
     @Query("SELECT a " +
             "from BPApplication a " +
-            "where a.step = 6 and a.approvalDate between :fromDate and :toDate " +
+            "where a.step = 7 and a.approvalDate between :fromDate and :toDate " +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> getProcessedApplications(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 

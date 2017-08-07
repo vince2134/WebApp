@@ -176,7 +176,7 @@
                                         </form>
                                         <form id="edit-employee" class="form-horizontal" th:action="@{/schedule-inspection-inspector}" method="GET">
                                             <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
-                                            <td th:if="${app.step} == 2"><button type="submit" class="btn btn-success" th:name="appId" th:value="${app.id}">Change Schedule</button></td>
+                                            <td th:if="${app.step} == 3"><button type="submit" class="btn btn-success" th:name="appId" th:value="${app.id}">Change Schedule</button></td>
                                         </form>
                                         <form id="edit-employee" class="form-horizontal" th:action="@{/inspection-criteria}" method="GET">
                                             <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>

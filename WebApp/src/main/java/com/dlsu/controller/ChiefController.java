@@ -171,12 +171,13 @@ public class ChiefController {
         BPApplication app = applicationService.findByIdNumber(appId);
         Fees fees = feesService.findByAppId(appId);
 
-        app.setStep(6);
+        app.setStep(7);
         app.setStatus("approved");
 
         applicationService.createNewApplication(app);
 
         modelAndView.addObject("currentUser", user);
+        modelAndView.addObject("approved", "approved");
         modelAndView.addObject("app", app);
         modelAndView.addObject("fees", fees);
         modelAndView.addObject("bpldAssess", userService.findUserByUserId(app.getAssessBpld()));
@@ -194,13 +195,14 @@ public class ChiefController {
         Fees fees = feesService.findByAppId(appId);
         BPApplication app = applicationService.findByIdNumber(appId);
 
-        app.setStep(6);
+        app.setStep(7);
         app.setStatus("disapproved");
 
         applicationService.createNewApplication(app);
 
         modelAndView.addObject("currentUser", user);
         modelAndView.addObject("app", app);
+        modelAndView.addObject("disapproved", "disapproved");
         modelAndView.addObject("fees", fees);
         modelAndView.addObject("bpldAssess", userService.findUserByUserId(app.getAssessBpld()));
         modelAndView.addObject("engAssess", userService.findUserByUserId(app.getAssessEng()));

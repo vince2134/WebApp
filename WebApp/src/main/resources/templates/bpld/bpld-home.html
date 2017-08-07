@@ -157,6 +157,7 @@
                                         <th>Business Address</th>
                                         <th>Applicant Email Address</th>
                                           <th></th>
+                                          <th></th>
                                       </tr>
                                     </thead>
 
@@ -172,6 +173,10 @@
                                                 <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
                                                 <td><button type="submit" class="btn btn-warning" th:name="appId" th:value="${app.id}">View</button></td>
                                             </form>
+                                              <form id="edit-employee" class="form-horizontal" th:action="@{/verification-of-document-application}" method="GET">
+                                                  <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
+                                                  <td><button type="submit" class="btn btn-warning" th:name="appId" th:value="${app.id}" th:if="${app.step == 1}">Verify Documents</button></td>
+                                              </form>
                                           </tr>
                                         </th:block>
                                     </tbody>

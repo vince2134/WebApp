@@ -94,7 +94,7 @@ public class InspectorController {
         User user = userService.findUserByUserId(curUserId);
 
         modelAndView.addObject("currentUser", user);
-        modelAndView.addObject("applications", applicationService.getInspectingApplications());
+        modelAndView.addObject("applications", applicationService.getProcessingApplications());
 
         return modelAndView;
     }
@@ -172,7 +172,7 @@ public class InspectorController {
         modelAndView.addObject("inspectors", userService.getInspectors());
 
 
-        scheduledApplication.setStep(2);
+        scheduledApplication.setStep(3);
         scheduledApplication.setStatus("inspecting");
         scheduledApplication.setInspectorName(userService.findUserByUserId(scheduledApplication.getInspectorId()).getFirstName() + userService.findUserByUserId(scheduledApplication.getInspectorId()).getLastName());
 
@@ -227,12 +227,12 @@ public class InspectorController {
         modelAndView.addObject("app", applicationService.findByIdNumber(appId));
 
         if(app.inspected()) {
-            app.setStep(3);
+            app.setStep(4);
             app.setInspectionDateComplete(new Date());
             //app.setStatus("inspected");
         }
         else
-            app.setStep(2);
+            app.setStep(3);
 
         applicationService.createNewApplication(app);
 

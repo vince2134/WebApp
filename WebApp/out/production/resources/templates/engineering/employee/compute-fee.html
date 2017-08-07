@@ -123,6 +123,25 @@
                     <input type="hidden" th:name="appId" th:value="${app.id}"/>
                     <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
                     <input type="hidden" th:field="*{id}" th:value="${fees.id}"/>
+                    <input type="hidden" th:field="*{locationClearanceVerifier}" th:value="${fees.locationClearanceVerifier}"/>
+                    <input type="hidden" th:field="*{barangayClearanceVerifier}" th:value="${fees.barangayClearanceVerifier}"/>
+                    <input type="hidden" th:field="*{healthClearanceVerifier}" th:value="${fees.healthClearanceVerifier}"/>
+                    <input type="hidden" th:field="*{occupancyPermitVerifier}" th:value="${fees.occupancyPermitVerifier}"/>
+                    <input type="hidden" th:field="*{fireSafetyClearanceVerifier}" th:value="${fees.fireSafetyClearanceVerifier}"/>
+                    <input type="hidden" th:field="*{others1Verifier}" th:value="${fees.others1Verifier}"/>
+                    <input type="hidden" th:field="*{others2Verifier}" th:value="${fees.others2Verifier}"/>
+                    <input type="hidden" th:field="*{others3Verifier}" th:value="${fees.others3Verifier}"/>
+                    <input type="hidden" th:field="*{others4Verifier}" th:value="${fees.others4Verifier}"/>
+
+                    <input type="hidden" th:field="*{locationClearanceDate}" th:value="${fees.locationClearanceDate}"/>
+                    <input type="hidden" th:field="*{barangayClearanceDate}" th:value="${fees.barangayClearanceDate}"/>
+                    <input type="hidden" th:field="*{healthClearanceDate}" th:value="${fees.healthClearanceDate}"/>
+                    <input type="hidden" th:field="*{occupancyPermitDate}" th:value="${fees.occupancyPermitDate}"/>
+                    <input type="hidden" th:field="*{fireSafetyClearanceDate}" th:value="${fees.fireSafetyClearanceDate}"/>
+                    <input type="hidden" th:field="*{others1Date}" th:value="${fees.others1Date}"/>
+                    <input type="hidden" th:field="*{others2Date}" th:value="${fees.others2Date}"/>
+                    <input type="hidden" th:field="*{others3Date}" th:value="${fees.others3Date}"/>
+                    <input type="hidden" th:field="*{others4Date}" th:value="${fees.others4Date}"/>
                     <div class="col-lg-12">
                         <h1>Compute Fees</h1>
 
@@ -267,123 +286,6 @@
                                     </div>
                                 </div>
 
-                            </div>
-                        </div>
-
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Verification of Documents</h3>
-                            </div>
-                            <div class="panel-body">
-                                <table class="table table-responsive table-hover">
-
-                                    <thead>
-                                    <tr>
-                                        <th>Description</th>
-                                        <th>Office/Agency</th>
-                                        <th>Date Issued</th>
-                                        <th>Verified By:</th>
-
-                                    </tr>
-                                    </thead>
-
-                                    <tbody>
-
-                                    <tr>
-                                        <td>Barangay Business Clearance</td>
-                                        <td>Barangay</td>
-                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{barangayClearanceDate}" th:value="${fees.barangayClearanceDate}"/></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{barangayClearanceVerifier}" th:value="${fees.barangayClearanceVerifier}"
-                                        /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Locational Clearance</td>
-                                        <td>Zoning Admin</td>
-                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{locationClearanceDate}" th:value="${fees.locationClearanceDate}"/></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{locationClearanceVerifier}" th:value="${fees.locationClearanceVerifier}"
-                                        /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Sanitary/Health Clearance</td>
-                                        <td>City health dept.</td>
-                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{healthClearanceDate}" th:value="${fees.healthClearanceDate}"/></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{healthClearanceVerifier}" th:value="${fees.healthClearanceVerifier}"
-                                        /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Occupancy Permit</td>
-                                        <td>Bldg Official</td>
-                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{occupancyPermitDate}" th:value="${fees.occupancyPermitDate}"/></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{occupancyPermitVerifier}" th:value="${fees.occupancyPermitVerifier}"
-                                        /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Fire Safety Clearance</td>
-                                        <td>City Fire Dept.</td>
-                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{fireSafetyClearanceDate}" th:value="${fees.fireSafetyClearanceDate}"/></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{fireSafetyClearanceVerifier}" th:value="${fees.fireSafetyClearanceVerifier}"
-                                        /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Others please Specify:</td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Description" th:field="*{others1Description}" th:value="${fees.others1Description}"
-                                        /></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Office/Agency" th:field="*{others1Office}" th:value="${fees.others1Office}"
-                                        /></td>
-                                        <td><input type="date" class="form-control" id="lName" name="lname" placeholder="Date Issued" th:field="*{others1Date}" th:value="${fees.others1Date}"
-                                        /></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{others1Verifier}" th:value="${fees.others1Verifier}"/></td>
-                                    </tr>
-
-
-                                    <tr>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Description" th:field="*{others2Description}" th:value="${fees.others2Description}"
-                                        /></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Office/Agency" th:field="*{others2Office}" th:value="${fees.others2Office}"
-                                        /></td>
-                                        <td><input type="date" class="form-control" id="lName" name="lname" placeholder="Date Issued" th:field="*{others2Date}" th:value="${fees.others2Date}"
-                                        /></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{others2Verifier}" th:value="${fees.others2Verifier}"
-                                        /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Description" th:field="*{others3Description}" th:value="${fees.others3Description}"
-                                        /></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Office/Agency" th:field="*{others3Office}" th:value="${fees.others3Office}"
-                                        /></td>
-                                        <td><input type="date" class="form-control" id="lName" name="lname" placeholder="Date Issued" th:field="*{others3Date}" th:value="${fees.others3Date}"
-                                        /></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{others3Verifier}" th:value="${fees.others3Verifier}"
-                                        /></td>
-                                    </tr>
-
-                                    <tr>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Description" th:field="*{others4Description}" th:value="${fees.others4Description}"
-                                        /></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Office/Agency" th:field="*{others4Office}" th:value="${fees.others4Office}"
-                                        /></td>
-                                        <td><input type="date" class="form-control" id="lName" name="lname" placeholder="Date Issued" th:field="*{others4Date}" th:value="${fees.others4Date}"
-                                        /></td>
-                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{others4Verifier}" th:value="${fees.others4Verifier}"
-                                        /></td>
-                                    </tr>
-
-
-                                    </tbody>
-
-                                </table>
                             </div>
                         </div>
 
