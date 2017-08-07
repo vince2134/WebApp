@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+    <!--Side bar -->
+    <div id="sidebar-wrapper" th:fragment="sidebar">
+
+        <h2 id="h2-sidebar" class="text-center"><b>Administrator</b></h2>
+        <p id="p-sidebar" class="text-center" th:text="Hi + ' ' + ${currentUser.firstName} + '!'"></p>
+        1
+        <ul class="sidebar-nav">
+            <li id="modules"><a th:href="@{admin-home(curUserId=${currentUser.userId})}">Employee List</a></li>
+            <li id="modules"><a th:href="@{create-employee(curUserId=${currentUser.userId})}">Add Employee</a></li>
+            <li id="modules"><a th:href="@{report-employee(curUserId=${currentUser.userId})}">Report an Employee</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>

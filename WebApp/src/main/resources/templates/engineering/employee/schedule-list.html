@@ -1,0 +1,207 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    
+     <title>Inspection Schedule</title>    
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    <script th:src="@{/js/search.js}"></script>
+    
+    <style>
+        
+        #sidebar-wrapper{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;   
+            
+        }
+        
+        #page-content-wrapper{
+            position: absolute;
+            margin-left: 250px;   
+        }
+        
+        
+        .sidebar-nav{
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li{
+            text-indent: 20px;
+            line-height: 40px;
+            
+        }
+        
+        .sidebar-nav li a{
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+            
+        }
+        
+        .sidebar-nav li a:hover{
+            background: gray;
+        }
+        
+        .navbar-text{
+            font-size: 20px;
+            color: black;
+        }
+        
+        .navbar{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+        
+        #subcategories{
+            text-indent: 50px;
+            font-size: 15px;
+        }
+        
+        #h2-sidebar{
+            color: white;
+            padding: 20px;
+        }
+        
+        #p-sidebar{
+            color: white;
+        }
+        
+        #modules{
+            font-size: 18px;
+        }
+        
+        h1{
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .panel-info{
+            margin-top: 30px;
+        }
+        
+        #myInput {
+            background-image: url('/css/searchicon.png'); /* Add a search icon to input */
+            background-position: 10px 12px; /* Position the search icon */
+            background-repeat: no-repeat; /* Do not repeat the icon image */
+            width: 100%; /* Full-width */
+            padding: 12px 20px 12px 40px; /* Add some padding */
+            border: 1px solid #ddd; /* Add a grey border */
+            margin-bottom: 12px; /* Add some space below the input */
+        }
+
+        #myTable {
+            border-collapse: collapse; /* Collapse borders */
+            width: 100%; /* Full-width */
+            border: 1px solid #ddd; /* Add a grey border */
+            
+        }
+
+        #myTable th, #myTable td {
+            text-align: left; /* Left-align text */
+            padding: 12px; /* Add padding */
+        }
+
+        #myTable tr {
+            border-bottom: 1px solid #ddd; 
+        }
+
+        #myTable tr.header, #myTable tr:hover {
+            background-color: #f1f1f1;
+        }
+        
+    </style>
+    
+</head>
+    
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+    <div th:replace="fragments/employee-sidebar :: sidebar">
+    </div>
+    
+    <div id="wrapper">
+        
+        <!--Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-9">
+
+                        <br/>
+                        <h1 style="font-size:160%; font-family:verdana;" class="panel-title" th:if="${schedules != null}" th:text="'Schedule Of Inspections' + ' (' + ${#lists.size(schedules)} + ')'"></h1>
+                        <h1 style="font-size:160%; font-family:verdana;" class="panel-title" th:if="${schedules == null}">Schedule Of Inspections</h1>
+                        <br/>
+                        
+                         <input type="text" id="myInput" placeholder="Search.."/>
+                        
+                        <div class="panel panel-info">
+                        <div class="panel-heading">
+                            
+                        </div>
+                        <div class="panel-body">
+                        
+                           <table id="myTable" class="table table-striped table-responsive table-hover">
+
+                                <thead>
+                                  <tr>
+                                    <th>Inspector</th>
+                                    <th>Application No.</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Address</th>  
+                                    
+                                  </tr>
+                                </thead>
+
+                                <tbody th:if="${schedules != null}">
+                                    <th:block th:each="schedule : ${schedules}">
+                                      <tr>
+
+                                        <td th:text="${schedule.inspectorName}"></td>
+                                        <td th:text="${schedule.referenceNumber}"></td>
+                                        <td th:text="${#dates.format(schedule.inspectionDate, 'dd-MMM-yyyy')}"></td>
+                                        <td th:text="${schedule.inspectionTime}"></td>
+                                        <td th:text="${schedule.city}"></td>
+
+                                      </tr>
+                                    </th:block>
+                                </tbody> 
+
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+   
+    
+</body>    
+    
+</html>

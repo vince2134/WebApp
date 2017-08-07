@@ -1,0 +1,180 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    
+     <title>Report an Employee</title>    
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    
+    <style>
+        
+        #sidebar-wrapper{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;   
+            
+        }
+        
+        #page-content-wrapper{
+            margin-left: 250px;   
+        }
+        
+        
+        .sidebar-nav{
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li{
+            text-indent: 20px;
+            line-height: 40px;
+            
+        }
+        
+        .sidebar-nav li a{
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+            
+        }
+        
+        .sidebar-nav li a:hover{
+            background: gray;
+        }
+        
+        .navbar-text{
+            font-size: 20px;
+            color: black;
+        }
+        
+        .navbar{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+        
+        #subcategories{
+            text-indent: 50px;
+            font-size: 15px;
+        }
+        
+        #h2-sidebar{
+            color: white;
+            padding: 20px;
+        }
+        
+        #p-sidebar{
+            color: white;
+        }
+        
+        #modules{
+            font-size: 18px;
+        }
+        
+        .panel-info{
+            margin-top: 30px;
+        }
+        
+        h1{
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        h5{
+            margin-left: 10%;
+        }
+        
+        textarea{
+          width: 80%;
+          margin-left: 10%;  
+        }
+    </style>
+    
+</head>
+    
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+<div th:replace="fragments/treasury-sidebar :: sidebar">
+</div>
+    
+    <div id="wrapper">
+        
+        <!--Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Report an Employee</h1>
+                        
+                    <div class="panel panel-info"> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div align="center" th:if="${success != null}">
+                                <p style="font-size: 20; color: #FF1C19;">Employee successfully reported.</p>
+                            </div>
+
+                            <form class="form-horizontal" th:action="@{/report-employee-treasury}" th:object="${report}" method="POST">
+                                <input type="hidden" th:field="*{adminId}" th:value="${report.adminId}"/>
+                                <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
+                                    <div class="form-group">
+                                        <label for="subject" class="col-sm-2 control-label">Subject:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="subject" name="subject" required="" th:field="*{subject}"/>
+                                        </div>
+                                    </div>
+                                   <div class="form-group">
+                                        <label for="date" class="col-sm-2 control-label">Date:</label>
+                                        <div class="col-sm-10">
+                                            <input type="date" class="form-control" id="date" name="date" required="" th:field="*{date}"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <h5><b>Complaint/Commend/Comment:</b></h5>
+
+                                        <textarea rows="5"  id="comment" th:field="*{comments}"></textarea>
+
+                                    </div>
+
+                                    <p align="center">
+                                        <button type="submit" class="btn btn-primary">Report</button>
+                                    </p>
+                            </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+            
+    </div>
+    
+    
+    
+   
+    
+</body>    
+    
+</html>

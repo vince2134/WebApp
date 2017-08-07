@@ -1,0 +1,152 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    
+     <title>Admin - Home</title>    
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    
+    <style>
+        
+        #sidebar-wrapper{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;   
+            
+        }
+        
+        #page-content-wrapper{
+            
+            margin-left: 250px;   
+        }
+        
+        
+        .sidebar-nav{
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li{
+            text-indent: 20px;
+            line-height: 40px;
+            
+        }
+        
+        .sidebar-nav li a{
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+            
+        }
+        
+        .sidebar-nav li a:hover{
+            background: gray;
+        }
+        
+        .navbar-text{
+            font-size: 20px;
+            color: black;
+        }
+        
+        .navbar{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+        
+        #subcategories{
+            text-indent: 50px;
+            font-size: 15px;
+        }
+        
+        #h2-sidebar{
+            color: white;
+            padding: 20px;
+        }
+        
+        #p-sidebar{
+            color: white;
+        }
+        
+        #modules{
+            font-size: 18px;
+        }
+        
+        .panel-primary{
+            margin-top: 30px;
+        }
+        #division{
+            border-bottom-style: solid;
+            border-bottom-color: slategray;
+            padding-bottom: 10px;
+        }
+        
+        
+        
+    </style>
+    
+</head>
+    
+<body>
+
+    <div th:replace="fragments/header :: header">
+    </div>
+
+    <div th:replace="fragments/chief-sidebar :: sidebar">
+    </div>
+    
+    <div id="wrapper">
+        
+        <!--Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        
+                        <div class="panel panel-primary">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Report</h3>
+                        </div>
+                            
+                            
+                             <div class="panel-body">
+                        
+                                 <h4><b>Report ID:</b></h4><p th:text="${report.id}"></p>
+                                 <h4><b>Date:</b></h4><p th:text="${#dates.format(report.date, 'dd-MMM-yyyy')}"></p>
+                                 <h4><b>Subject:</b></h4><p th:text="${report.subject}"></p>
+                                 <h4><b>Complaint/Comment/Commend:</b></h4><p th:text="${report.comments}"></p>
+                                 
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+   
+    
+</body>    
+    
+</html>

@@ -1,0 +1,115 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    
+    <title>Log In!</title>    
+    
+    <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" th:href="@{https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css}"/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet"/>
+    
+    <style>
+    @import "bourbon";
+
+    body {
+      background-image: url("http://24.media.tumblr.com/tumblr_lpf3i695DC1qbvpl8o1_1280.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .wrapper {	
+      margin-top: 40px;
+      
+    }
+
+    .form-signin {
+      max-width: 380px;
+      padding: 15px 35px 45px;
+      margin: 0 auto;
+      background-color: #fff;
+      border: 1px solid rgba(0,0,0,0.1); 
+    }
+
+    .form-signin-heading{
+      margin-bottom: 30px;
+      text-align: center;      
+    }
+
+	.form-control {
+	  position: relative;
+	  font-size: 16px;
+	  height: auto;
+      margin-bottom: 20px;    
+	  padding: 10px;
+		@include box-sizing(border-box);
+
+        &amp;:focus {
+		  z-index: 2;
+		}
+	}
+
+	input[type="text"] {
+	  margin-bottom: 20px;
+	  
+	}
+
+	input[type="password"] {
+	  margin-bottom: 20px;
+	  margin-top: 20px;
+	}
+    
+    .city{
+      text-align: center; 
+      margin-top: 150px;
+      font-size: 40px;    
+      font-family: 'Open Sans', sans-serif;
+      color: white;
+    }    
+        
+    p{
+      padding-top: 20px;
+      text-align: center;        
+    }    
+     
+}
+
+    </style>    
+    
+   
+    
+</head>
+    
+<body>
+    
+    <h3 class="city"><b>Mandaluyong City Hall</b></h3>
+      
+    <div class="wrapper">
+        
+    <form class="form-signin" th:action="@{/login}" th:object="${user}" method="POST">
+        
+      <h2 class="form-signin-heading">Log In</h2>
+      <input type="text" th:field="*{username}" class="form-control" name="username" placeholder="Username" required="" autofocus="" />
+      <input type="password" th:field="*{password}" class="form-control" name="password" placeholder="Password" required=""/>
+
+        <div align="center" th:if="${hasError != null}">
+            <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+        </div>
+        
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
+        <p>Client? Track your application <i><b><a th:href="@{enter-application-client}">here</a></b></i></p>
+        
+    </form>
+        
+    </div>
+  
+</body>    
+    
+</html>

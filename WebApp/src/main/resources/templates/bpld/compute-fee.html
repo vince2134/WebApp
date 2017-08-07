@@ -1,0 +1,445 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <title>Compute Fee</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" />
+
+    <style>
+        #sidebar-wrapper {
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;
+        }
+
+        #page-content-wrapper {
+            margin-left: 250px;
+        }
+
+
+        .sidebar-nav {
+            padding: 0;
+            list-style: none;
+        }
+
+        .sidebar-nav li {
+            text-indent: 20px;
+            line-height: 40px;
+        }
+
+        .sidebar-nav li a {
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+        }
+
+        .sidebar-nav li a:hover {
+            background: gray;
+        }
+
+        .navbar-text {
+            font-size: 20px;
+            color: black;
+        }
+
+        .navbar {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+
+        #subcategories {
+            text-indent: 50px;
+            font-size: 15px;
+        }
+
+        #h2-sidebar {
+            color: white;
+            padding: 20px;
+        }
+
+        #p-sidebar {
+            color: white;
+        }
+
+        #modules {
+            font-size: 18px;
+        }
+
+        .panel-info,
+        .panel-default {
+            margin-top: 30px;
+        }
+
+        h1 {
+            font-family: 'Roboto', sans-serif;
+        }
+
+        textarea {
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        h5 {
+            margin-left: 10%;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+<div th:replace="fragments/bpld-sidebar :: sidebar">
+</div>
+
+<div id="wrapper">
+
+
+    <!--Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <form class="form-horizontal" th:action="@{/compute-fees-bpld}" th:object="${fees}" method="POST">
+                    <input type="hidden" th:name="appId" th:value="${app.id}"/>
+                    <input type="hidden" th:field="*{id}" th:value="${fees.id}"/>
+                    <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
+                    <div class="col-lg-12">
+                        <h1>Compute Fees</h1>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Compute Fees for:</h3>
+                            </div>
+                            <div class="panel-body">
+
+                                <table class="table table-responsive table-hover">
+
+                                    <thead>
+                                    <tr>
+                                        <th>Applicant Name</th>
+                                        <th>Application No.</th>
+                                        <th>Business Name</th>
+                                        <th>Business Address</th>
+                                        <th>Applicant Email Address</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                    <tr>
+                                        <td th:text="${app.applicantName}"></td>
+                                        <td th:text="${app.registrationNumber}"></td>
+                                        <td th:text="${app.businessName}"></td>
+                                        <td th:text="${app.city}"></td>
+                                        <td th:text="${app.email}"></td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-info">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"></h3>
+                            </div>
+                            <div class="panel-body">
+
+                                <div align="center" th:if="${success != null}">
+                                    <p style="font-size: 20; color: #FF1C19;">Fees successfully saved</p>
+                                </div>
+
+                                <div align="center" th:if="${treasury != null}">
+                                    <p style="font-size: 20; color: #FF1C19;">Successfully sent to treasury</p>
+                                </div>
+
+                                <p><b><i>*Please add the corresponding penalty amount if any</i></b></p>
+
+
+                                <div class="form-group">
+                                    <label for="lName" class="col-sm-2 control-label">Local Business Tax:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="lName" name="lname" th:field="*{localBusinessTax}" th:value="${fees.localBusinessTax}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fName" class="col-sm-2 control-label">Tax on Delivery vans/trucks:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="fName" name="fname" th:field="*{taxOnDelivery}" th:value="${fees.taxOnDelivery}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fName" class="col-sm-2 control-label">Tax on Storage for flammable substance:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="fName" name="fname" th:field="*{taxOnStorage}" th:value="${fees.taxOnStorage}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="department" class="col-sm-2 control-label">Tax on signboard/billboards:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="password" name="password" th:field="*{taxOnSignboard}" th:value="${fees.taxOnSignboard}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fName" class="col-sm-2 control-label">Mayor's Permit Fee:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="fName" name="fname" th:field="*{mayorPermit}" th:value="${fees.mayorPermit}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mName" class="col-sm-2 control-label">Garbage Charges:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="mName" name="mname" th:field="*{garbageCharges}" th:value="${fees.garbageCharges}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="delfee" class="col-sm-2 control-label">Delivery Trucks/Vans Permit Fee:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="delfee" name="delfee" th:field="*{deliveryPermit}" th:value="${fees.deliveryPermit}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mName" class="col-sm-2 control-label">Sanitary Inspection Fee:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="mName" name="mname" th:field="*{sanitaryInspection}" th:value="${fees.sanitaryInspection}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="address" class="col-sm-2 control-label">Building Inspection Fee:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="address" name="address" th:field="*{buildingInspection}" th:value="${fees.buildingInspection}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username" class="col-sm-2 control-label">Electrical Inspection Fee:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="username" name="username" th:field="*{electricalInspection}" th:value="${fees.electricalInspection}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-2 control-label">Mechanical Inspection Fee:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="password" name="password" th:field="*{mechanicalInspection}" th:value="${fees.mechanicalInspection}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="department" class="col-sm-2 control-label">Plumbing Inspection Fee:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="password" name="password" th:field="*{plumbingInspection}" th:value="${fees.plumbingInspection}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="department" class="col-sm-2 control-label">Signboard/BillBoard Renewal Fee:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="password" name="password" th:field="*{signboardRenewal}" th:value="${fees.signboardRenewal}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="department" class="col-sm-2 control-label">Signboard/BillBoard Permit Fee:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="password" name="password" th:field="*{signboardPermit}" th:value="${fees.signboardPermit}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="department" class="col-sm-2 control-label">Storage and sale of flammable substance:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" step="any" class="form-control" id="password" name="password" th:field="*{storageFlam}" th:value="${fees.storageFlam}"/>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Verification of Documents</h3>
+                            </div>
+                            <div class="panel-body">
+                                <table class="table table-responsive table-hover">
+
+                                    <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Office/Agency</th>
+                                        <th>Date Issued</th>
+                                        <th>Verified By:</th>
+
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+
+                                    <tr>
+                                        <td>Barangay Business Clearance</td>
+                                        <td>Barangay</td>
+                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{barangayClearanceDate}" th:value="${fees.barangayClearanceDate}"/></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{barangayClearanceVerifier}" th:value="${fees.barangayClearanceVerifier}"
+                                        /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Locational Clearance</td>
+                                        <td>Zoning Admin</td>
+                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{locationClearanceDate}" th:value="${fees.locationClearanceDate}"/></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{locationClearanceVerifier}" th:value="${fees.locationClearanceVerifier}"
+                                        /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Sanitary/Health Clearance</td>
+                                        <td>City health dept.</td>
+                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{healthClearanceDate}" th:value="${fees.healthClearanceDate}"/></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{healthClearanceVerifier}" th:value="${fees.healthClearanceVerifier}"
+                                        /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Occupancy Permit</td>
+                                        <td>Bldg Official</td>
+                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{occupancyPermitDate}" th:value="${fees.occupancyPermitDate}"/></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{occupancyPermitVerifier}" th:value="${fees.occupancyPermitVerifier}"
+                                        /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Fire Safety Clearance</td>
+                                        <td>City Fire Dept.</td>
+                                        <td><input type="date" class="form-control" id="lName" name="lname" th:field="*{fireSafetyClearanceDate}" th:value="${fees.fireSafetyClearanceDate}"/></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{fireSafetyClearanceVerifier}" th:value="${fees.fireSafetyClearanceVerifier}"
+                                        /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td>Others please Specify:</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Description" th:field="*{others1Description}" th:value="${fees.others1Description}"
+                                        /></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Office/Agency" th:field="*{others1Office}" th:value="${fees.others1Office}"
+                                        /></td>
+                                        <td><input type="date" class="form-control" id="lName" name="lname" placeholder="Date Issued" th:field="*{others1Date}" th:value="${fees.others1Date}"
+                                        /></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{others1Verifier}" th:value="${fees.others1Verifier}"/></td>
+                                    </tr>
+
+
+                                    <tr>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Description" th:field="*{others2Description}" th:value="${fees.others2Description}"
+                                        /></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Office/Agency" th:field="*{others2Office}" th:value="${fees.others2Office}"
+                                        /></td>
+                                        <td><input type="date" class="form-control" id="lName" name="lname" placeholder="Date Issued" th:field="*{others2Date}" th:value="${fees.others2Date}"
+                                        /></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{others2Verifier}" th:value="${fees.others2Verifier}"
+                                        /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Description" th:field="*{others3Description}" th:value="${fees.others3Description}"
+                                        /></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Office/Agency" th:field="*{others3Office}" th:value="${fees.others3Office}"
+                                        /></td>
+                                        <td><input type="date" class="form-control" id="lName" name="lname" placeholder="Date Issued" th:field="*{others3Date}" th:value="${fees.others3Date}"
+                                        /></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{others3Verifier}" th:value="${fees.others3Verifier}"
+                                        /></td>
+                                    </tr>
+
+                                    <tr>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Description" th:field="*{others4Description}" th:value="${fees.others4Description}"
+                                        /></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Office/Agency" th:field="*{others4Office}" th:value="${fees.others4Office}"
+                                        /></td>
+                                        <td><input type="date" class="form-control" id="lName" name="lname" placeholder="Date Issued" th:field="*{others4Date}" th:value="${fees.others4Date}"
+                                        /></td>
+                                        <td><input type="text" class="form-control" id="lName" name="lname" placeholder="Verifier" th:field="*{others4Verifier}" th:value="${fees.others4Verifier}"
+                                        /></td>
+                                    </tr>
+
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-danger">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Penalties Incurred</h3>
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <h5><b>Please specify the penalties (and the reason) incurred by the business</b></h5>
+                                    <textarea rows="5" id="comment" th:field="*{penalties}" th:value="${fees.penalties}"></textarea>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-warning">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"> Add Remarks</h3>
+                            </div>
+                            <div class="panel-body">
+
+                                <div class="form-group">
+                                    <h5><b>Remarks:</b></h5>
+
+                                    <textarea rows="5" id="comment" th:field="*{remarks}" th:value="${fees.remarks}"></textarea>
+
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+                        <p align="center">
+                            <button type="submit" class="btn btn-warning" th:if="${treasury == null}">Hold</button>
+                        </p>
+                    </div>
+                </form>
+                <form class="form-horizontal" th:action="@{/send-to-treasury-bpld}" method="POST">
+                    <p align="center">
+                        <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
+                        <input type="hidden" th:name="appId" th:value="${app.id}"/>
+                        <button type="submit" class="btn btn-primary" th:if="${verified != null and treasury == null and app.assessBpld != null and app.assessEng != null}">Send to Treasury</button>
+                    </p>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

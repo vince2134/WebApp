@@ -1,0 +1,251 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    
+     <title>Inspection Criteria</title>    
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    
+    <style>
+        
+        #sidebar-wrapper{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;   
+            
+        }
+        
+        #page-content-wrapper{
+            margin-left: 250px;   
+        }
+        
+        
+        .sidebar-nav{
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li{
+            text-indent: 20px;
+            line-height: 40px;
+            
+        }
+        
+        .sidebar-nav li a{
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+            
+        }
+        
+        .sidebar-nav li a:hover{
+            background: gray;
+        }
+        
+        .navbar-text{
+            font-size: 20px;
+            color: black;
+        }
+        
+        .navbar{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+        
+        #subcategories{
+            text-indent: 50px;
+            font-size: 15px;
+        }
+        
+        #h2-sidebar{
+            color: white;
+            padding: 20px;
+        }
+        
+        #p-sidebar{
+            color: white;
+        }
+        
+        #modules{
+            font-size: 18px;
+        }
+        
+        .panel-info, .panel-default{
+            margin-top: 30px;
+        }
+        
+        h1{
+            font-family: 'Roboto', sans-serif;
+        }
+        
+         textarea{
+          width: 80%;
+          margin-left: 10%;  
+        }
+         h5{
+            margin-left: 10%;
+        }
+    </style>
+    
+</head>
+    
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+    <div th:replace="fragments/inspector-sidebar :: sidebar">
+    </div>
+    
+    <div id="wrapper">
+
+        
+        <!--Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Inspection Criteria</h1>
+                        
+                   <div class="panel panel-default"> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Inspection for:</h3>
+                        </div>
+                        <div class="panel-body">
+                             <table class="table table-responsive table-hover">
+
+                                <thead>
+                                  <tr>
+                                    <th>Applicant Name</th>
+                                    <th>Application No.</th>
+                                    <th>Business Name</th>
+                                    <th>Business Address</th>
+                                    <th>Applicant Email Address</th>  
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                  <tr>
+
+                                    <td th:text="${app.applicantName}"></td>
+                                    <td th:text="${app.referenceNumber}"></td>
+                                    <td th:text="${app.businessName}"></td>
+                                    <td th:text="${app.city}"></td>
+                                    <td th:text="${app.email}"></td>
+                            
+                                  </tr>
+                                    
+                                </tbody> 
+
+                            </table>
+                        </div>    
+                    </div>
+                        
+                    <div class="panel panel-info"> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Inspect</h3>
+                        </div>
+                        <div class="panel-body">
+
+
+                            <div align="center" th:if="${success != null}">
+                                <p style="font-size: 20; color: #FF1C19;">Inspection saved</p>
+                            </div>
+
+                        <form class="form-horizontal" th:action="@{/inspection-criteria}" th:object="${app}" method="POST">
+                            <input type="hidden" th:field="*{id}" th:value="${app.id}"/>
+                            <input type="hidden" th:field="*{applicantName}" th:value="${app.applicantName}"/>
+                            <input type="hidden" th:field="*{unitNumber}" th:value="${app.unitNumber}"/>
+                            <input type="hidden" th:field="*{street}" th:value="${app.street}"/>
+                            <input type="hidden" th:field="*{barangay}" th:value="${app.barangay}"/>
+                            <input type="hidden" th:field="*{subdivision}" th:value="${app.subdivision}"/>
+                            <input type="hidden" th:field="*{city}" th:value="${app.city}"/>
+                            <input type="hidden" th:field="*{inspectorId}" th:value="${app.inspectorId}"/>
+                            <input type="hidden" th:field="*{inspectionDate}" th:value="${app.inspectionDate}"/>
+                            <input type="hidden" th:field="*{inspectionTime}" th:value="${app.inspectionTime}"/>
+                            <input type="hidden" th:field="*{inspectorName}" th:value="${app.inspectorName}"/>
+                            <input type="hidden" th:field="*{applicationDate}" th:value="${app.applicationDate}"/>
+                            <input type="hidden" th:field="*{bpldId}" th:value="${app.bpldId}"/>
+                            <input type="hidden" th:field="*{status}" th:value="${app.status}"/>
+                            <input type="hidden" th:field="*{email}" th:value="${app.email}"/>
+                            <input type="hidden" th:field="*{taxYear}" th:value="${app.taxYear}"/>
+                            <input type="hidden" th:field="*{applicationType}" th:value="${app.applicationType}"/>
+                            <input type="hidden" th:field="*{referenceNumber}" th:value="${app.referenceNumber}"/>
+                            <input type="hidden" th:field="*{registrationNumber}" th:value="${app.registrationNumber}"/>
+                            <input type="hidden" th:field="*{businessName}" th:value="${app.businessName}"/>
+                            <input type="hidden" th:field="*{encodedDate}" th:value="${app.encodedDate}"/>
+                            <input type="hidden" th:field="*{registrationDate}" th:value="${app.registrationDate}"/>
+                            <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
+                            <input type="hidden" th:name="appId" th:value="${app.id}"/>
+                                <div class="checkbox">
+                                  <label><input type="checkbox" value="" th:field="${app.c1}"/>Criteria 1</label>
+                                </div>
+                                <div class="checkbox">
+                                  <label><input type="checkbox" value="" th:field="${app.c2}"/>Criteria 2</label>
+                                </div>
+                                <div class="checkbox">
+                                  <label><input type="checkbox" value="" th:field="${app.c3}"/>Criteria 3</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:field="${app.c4}"/>Criteria 4</label>
+                                    </div>
+                                <div class="checkbox">
+                                      <label><input type="checkbox" value="" th:field="${app.c5}"/>Criteria 5</label>
+                                    </div>
+                                <div class="checkbox">
+                                      <label><input type="checkbox" value="" th:field="${app.c6}"/>Criteria 6</label>
+                                    </div>
+                                <div class="checkbox">
+                                      <label><input type="checkbox" value="" th:field="${app.c7}"/>Criteria 7</label>
+                                    </div>
+                                <div class="checkbox">
+                                      <label><input type="checkbox" value="" th:field="${app.c8}"/>Criteria 8</label>
+                                    </div>
+                                <div class="checkbox">
+                                      <label><input type="checkbox" value="" th:field="${app.c9}"/>Criteria 9</label>
+                                    </div>
+                                <div class="checkbox">
+                                      <label><input type="checkbox" value="" th:field="${app.c10}"/>Criteria 10</label>
+                                    </div>
+
+                            <p align="center"><button class="btn btn-warning">Submit</button></p>
+                                </form>
+                            </div>
+                        </div>
+                        
+                        
+                        
+                        
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+            
+    </div>
+    
+    
+    
+   
+    
+</body>    
+    
+</html>

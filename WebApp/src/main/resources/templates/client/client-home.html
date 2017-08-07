@@ -1,0 +1,630 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    
+     <title>Home</title>    
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <style>
+        
+       #sidebar-wrapper{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;   
+            
+        }
+        
+        #page-content-wrapper{
+           
+        }
+       
+        .sidebar-nav{
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li{
+            text-indent: 20px;
+            line-height: 40px;
+            
+        }
+        
+        .sidebar-nav li a{
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+            
+        }
+        
+        .sidebar-nav li a:hover{
+            background: gray;
+        }
+        
+        #menu-toggle{
+           padding-top: 50px;
+        }
+        
+        .navbar-text{
+            font-size: 20px;
+        }
+        
+        .navbar{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+        
+        #subcategories{
+            text-indent: 50px;
+            font-size: 15px;
+        }
+        
+        #h2-sidebar{
+            color: white;
+            padding: 20px;
+        }
+        
+        #p-sidebar{
+            color: white;
+        }
+        
+        #modules{
+            font-size: 18px;
+        }
+        
+         .panel-primary{
+            margin-top: 30px;
+        }
+        
+        .progress{
+            margin-top: 20px;
+            margin-left: 15%;
+            width: 70%;
+        }
+        
+        h3{
+            text-align: center;
+        }
+        
+        
+        
+    </style>
+    
+</head>
+    
+<body>
+
+    <div th:replace="fragments/header :: header">
+    </div>
+
+    <div id="wrapper">
+        
+        <!--Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-primary" th:if="${currentApplication.step == 6}">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Application Status</h3>
+                            </div>
+                            <div class="panel-body">
+                                <tbody>
+                                <div align="center">
+                                    <p style="font-size: 20; color: #FF1C19;" th:text="${currentApplication.status}"></p>
+                                </div>
+                                </tbody>
+
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Application Details</h3>
+                        </div>
+
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Application Number (Reference Number):</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${currentApplication.referenceNumber}">182739</p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Applicant Name:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${currentApplication.applicantName}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Business Address:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${currentApplication.city}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Business Name:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${currentApplication.businessName}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Type of Application:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${currentApplication.applicationType}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Date of Application:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(currentApplication.applicationDate, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">DTI/SEC/CDA Registration No:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${currentApplication.registrationNumber}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">DTI/SEC/CDA Registration Date:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(currentApplication.registrationDate, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-warning">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Application Progress</h3>
+                        </div>
+                            
+                        <div class="panel-body" align="center">
+
+                            <label class="checkbox-inline"><input type="checkbox" value="" th:checked="${currentApplication.step} > 0" onclick="return false;"/>Encoding of Document</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="" th:checked="${currentApplication.step} > 1" onclick="return false;"/>Scheduling of inspection</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="" th:checked="${currentApplication.step} > 2" onclick="return false;"/>Business Inspection</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="" th:checked="${currentApplication.step} > 3" onclick="return false;"/>Computation of Fees</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="" th:checked="${currentApplication.step} > 4" onclick="return false;"/>Ready for Payment</label>
+                            <label class="checkbox-inline"><input type="checkbox" value="" th:checked="${currentApplication.step} > 5" onclick="return false;"/>Approval of Department Chief</label>
+                        
+                     </div>
+                        </div>
+
+                        <div class="panel panel-info">
+
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Scheduled Inspection</h3>
+                            </div>
+                            <div class="panel-body">
+
+                                <table class="table table-striped table-responsive table-hover">
+
+                                    <thead th:if="${currentApplication.step == 2}">
+                                    <tr>
+                                        <th>Inspector</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody th:if="${currentApplication.step == 2}">
+                                    <tr>
+
+                                        <td th:text="${currentApplication.inspectorName}"></td>
+                                        <td th:text="${#dates.format(currentApplication.inspectionDate, 'dd-MMM-yyyy')}"></td>
+                                        <td th:text="${currentApplication.inspectionTime}"></td>
+                                    </tr>
+
+                                    </tbody>
+
+                                </table>
+
+                                <tbody th:if="${currentApplication.step == 1}">
+                                <div align="center">
+                                    <h3>No schedule yet</h3>
+                                </div>
+                                </tbody>
+
+                                <tbody th:if="${currentApplication.step > 2}">
+                                <div align="center">
+                                    <h3>Inspection done</h3>
+                                </div>
+                                </tbody>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-danger">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Inspection Criteria</h3>
+                        </div>
+                            <div align="center">
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c1}" onclick="return false;"/>Criteria 1</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c2}" onclick="return false;"/>Criteria 2</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c3}" onclick="return false;"/>Criteria 3</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c4}" onclick="return false;"/>Criteria 4</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c5}" onclick="return false;"/>Criteria 5</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c6}" onclick="return false;"/>Criteria 6</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c7}" onclick="return false;"/>Criteria 7</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c8}" onclick="return false;"/>Criteria 8</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c9}" onclick="return false;"/>Criteria 9</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" th:checked="${currentApplication.c10}" onclick="return false;"/>Criteria 10</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="panel panel-danger">
+
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Documents</h3>
+                            </div>
+
+                            <div class="panel-body">
+                                <h3 th:if="${fees == null}">No approved documents yet</h3>
+
+                                <div class="table-responsive" th:if="${fees!= null}">
+                                    <table class="table">
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Barangay Business Clearance Date:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(fees.barangayClearanceDate, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                                <label class="col-sm-6 control-label">Barangay Business Clearance Verifier:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.barangayClearanceVerifier}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Locational Clearance Date:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(fees.locationClearanceDate, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                                <label class="col-sm-6 control-label">Locational Clearance Verifier:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.locationClearanceVerifier}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Sanitary/Health Clearance Date:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(fees.healthClearanceDate, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                                <label class="col-sm-6 control-label">Sanitary/Health Clearance Verifier:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.healthClearanceVerifier}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Occupancy Permit Date:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(fees.occupancyPermitDate, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                                <label class="col-sm-6 control-label">Occupancy Permit Verifier:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.occupancyPermitVerifier}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Fire Safety Clearance Date:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(fees.fireSafetyClearanceDate, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                                <label class="col-sm-6 control-label">Fire Safety Clearance Verifier:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.fireSafetyClearanceVerifier}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr th:if="${fees.others1Description != null and fees.others1Date != null}">
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label" th:text="${fees.others1Description} + ' Date:'"></label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(fees.others1Date, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                                <label class="col-sm-6 control-label" th:text="${fees.others1Description} + ' Verifier:'"></label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.others1Verifier}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr th:if="${fees.others2Description != null and fees.others2Date != null}">
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label" th:text="${fees.others2Description} + ' Date:'"></label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(fees.others2Date, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                                <label class="col-sm-6 control-label" th:text="${fees.others2Description} + ' Verifier:'"></label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.others2Verifier}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr th:if="${fees.others3Description != null  and fees.others3Date != null}">
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label" th:text="${fees.others3Description} + ' Date:'"></label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(fees.others3Date, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                                <label class="col-sm-6 control-label" th:text="${fees.others3Description} + ' Verifier:'"></label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.others3Verifier}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr th:if="${fees.others4Description != null  and fees.others4Date != null}">
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label" th:text="${fees.others4Description} + ' Date:'"></label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${#dates.format(fees.others4Date, 'dd-MMM-yyyy')}"></p>
+                                                </div>
+                                                <label class="col-sm-6 control-label" th:text="${fees.others4Description} + ' Verifier:'"></label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.others4Verifier}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-danger">
+
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Application Fees</h3>
+                            </div>
+
+                            <h3 th:if="${4 > currentApplication.step}">Fees not yet available</h3>
+
+                            <div class="panel-body" th:if="${currentApplication.step > 3}">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Local Business Tax:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.localBusinessTax}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Tax on Delivery vans/trucks:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.taxOnDelivery}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Tax on Storage for flammable substance:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.taxOnStorage}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Tax on signboard/billboards:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.taxOnSignboard}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Mayor's Permit Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.mayorPermit}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Garbage Charges:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.garbageCharges}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Delivery Trucks/Vans Permit Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.deliveryPermit}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Sanitary Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.sanitaryInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Building Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.buildingInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Electrical Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.electricalInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Mechanical Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.mechanicalInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Plumbing Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.plumbingInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Signboard/BillBoard Renewal Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.signboardRenewal}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Signboard/BillBoard Permit Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.signboardPermit}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Storage and sale of flammable substance:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.storageFlam}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">TOTAL AMOUNT:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="'PHP ' + ${total}"><b><i></i></b></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Penalties</h3>
+                            </div>
+                            <th:block th:if="${currentApplication.step > 3}">
+                                <h3 th:if="${fees.penalties != null}" th:text="${fees.penalties}"></h3>
+                                <h3 th:if="${fees.penalties.isEmpty()}">No Penalties</h3>
+                            </th:block>
+                            <h3 th:if="${4 > currentApplication.step}">No Penalties</h3>
+                        </div>
+
+                        <div class="panel panel-default">
+
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Remarks</h3>
+                            </div>
+                            <th:block th:if="${currentApplication.step > 3}">
+                                <h3 th:if="${fees.remarks != null}" th:text="${fees.remarks}"></h3>
+                                <h3 th:if="${fees.remarks.isEmpty()}">No Remarks</h3>
+                            </th:block>
+                            <h3 th:if="${4 > currentApplication.step}">No Remarks</h3>
+                        </div>
+                        
+                        
+                        
+                    </div>    
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    <!--Menu toggle script -->
+    <script>
+        $("#menu-toggle").click(function(e){
+            e.preventDefault();
+            $("#wrapper").toggleClass("menuDisplayed");
+        });
+    
+    </script>
+    
+</body>    
+    
+</html>

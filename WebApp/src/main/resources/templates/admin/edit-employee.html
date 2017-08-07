@@ -1,0 +1,235 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    
+     <title>Edit Employee</title>    
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    
+    <style>
+        
+        #sidebar-wrapper{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;   
+            
+        }
+        
+        #page-content-wrapper{
+            margin-left: 250px;   
+        }
+        
+        
+        .sidebar-nav{
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li{
+            text-indent: 20px;
+            line-height: 40px;
+            
+        }
+        
+        .sidebar-nav li a{
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+            
+        }
+        
+        .sidebar-nav li a:hover{
+            background: gray;
+        }
+        
+        .navbar-text{
+            font-size: 20px;
+            color: black;
+        }
+        
+        .navbar{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+        
+        #subcategories{
+            text-indent: 50px;
+            font-size: 15px;
+        }
+        
+        #h2-sidebar{
+            color: white;
+            padding: 20px;
+        }
+        
+        #p-sidebar{
+            color: white;
+        }
+        
+        #modules{
+            font-size: 18px;
+        }
+        
+        .panel-info{
+            margin-top: 30px;
+        }
+        
+        h1{
+            font-family: 'Roboto', sans-serif;
+        }
+        
+    </style>
+    
+</head>
+    
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+<div th:replace="fragments/admin-sidebar :: sidebar">
+</div>
+    
+    <div id="wrapper">
+        
+        <!--Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Edit an Employee!</h1>
+                        
+                    <div class="panel panel-info"> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                        </div>
+                        <div class="panel-body">
+
+                            <div align="center" th:if="${success != null}">
+                                <p style="font-size: 20; color: #FF1C19;">Employee successfully saved.</p>
+                            </div>
+
+                        <form class="form-horizontal" th:action="@{/edit-employee}" th:object="${user}" method="POST">
+                            <input type="hidden" th:field="*{userId}" th:value="${user.userId}"/>
+                            <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
+                                <div class="form-group">
+                                    <label for="lName" class="col-sm-2 control-label">Last Name:*</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" th:maxlength="16" class="form-control" id="lName" name="lname" required="" th:field="*{lastName}" th:value="${user.lastName}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="fName" class="col-sm-2 control-label">First Name:*</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" th:maxlength="32" class="form-control" id="fName" name="fname" required="" th:field="*{firstName}" th:value="${user.firstName}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="mName" class="col-sm-2 control-label">Middle Initial:*</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" th:maxlength="1" class="form-control" id="mName" name="mname" required="" th:field="*{middleInitial}" th:value="${user.middleInitial}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="username" class="col-sm-2 control-label">Username:*</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="username" name="username" required="" th:field="*{username}" th:value="${user.username}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password" class="col-sm-2 control-label">Password:*</label>
+                                    <div class="col-sm-10">
+                                        <input type="password" class="form-control" id="password" name="password" required="" th:field="*{password}" th:value="${user.password}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email" class="col-sm-2 control-label">Email:*</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" th:field="*{email}" th:value="${user.email}" class="form-control" id="email" name="email" required=""/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="department" class="col-sm-2 control-label">Department:*</label>
+                                    <div class="col-sm-10">
+                                        <select class="form-control" name="department" th:field="*{department}" th:value="${user.department}">
+                                            <option value="engineering - employee" selected="">engineering - employee</option>
+                                            <option value="engineering - inspector">engineering - inspector</option>
+                                            <option value="treasury">treasury</option>
+                                            <option value="bpld">bpld</option>
+                                            <option value="chief">chief</option>
+                                            <option value="admin">admin</option>
+                                        </select></div>
+                                </div>
+                            <h5>Address:</h5>
+                                <div class="form-group">
+                                    <label for="unit" class="col-sm-2 control-label">Unit Number:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" min="0" class="form-control" id="address" name="address" th:field="*{unitNumber}" th:value="${user.unitNumber}"/>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="street" class="col-sm-2 control-label">Street:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="address" name="address" th:field="*{street}" th:value="${user.street}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="barangay" class="col-sm-2 control-label">Barangay:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="address" name="address" th:field="*{barangay}" th:value="${user.barangay}"/>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="subdivision" class="col-sm-2 control-label">Subdivision:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="address" name="address" th:field="*{subdivision}" th:value="${user.subdivision}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city" class="col-sm-2 control-label">City/Municipality:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="address" name="address" th:field="*{city}" th:value="${user.city}"/>
+                                    </div>
+                                </div>
+                                
+                                <p align="center">
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </p>
+                            
+                                </form>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+            
+    </div>
+    
+    
+    
+   
+    
+</body>    
+    
+</html>

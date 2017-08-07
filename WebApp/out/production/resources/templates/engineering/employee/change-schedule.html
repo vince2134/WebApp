@@ -1,0 +1,217 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    
+     <title>Create Inspection Schedule</title>    
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+    
+    <style>
+        
+        #sidebar-wrapper{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;   
+            
+        }
+        
+        #page-content-wrapper{
+          
+            margin-left: 250px;   
+        }
+        
+        
+        .sidebar-nav{
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li{
+            text-indent: 20px;
+            line-height: 40px;
+            
+        }
+        
+        .sidebar-nav li a{
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+            
+        }
+        
+        .sidebar-nav li a:hover{
+            background: gray;
+        }
+        
+        .navbar-text{
+            font-size: 20px;
+            color: black;
+        }
+        
+        .navbar{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+        
+        #subcategories{
+            text-indent: 50px;
+            font-size: 15px;
+        }
+        
+        #h2-sidebar{
+            color: white;
+            padding: 20px;
+        }
+        
+        #p-sidebar{
+            color: white;
+        }
+        
+        #modules{
+            font-size: 18px;
+        }
+        
+        h1{
+            font-family: 'Roboto', sans-serif;
+        }
+        
+         .panel-info{
+            margin-top: 30px;
+        }
+        
+    </style>
+    
+</head>
+    
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+    <div th:replace="fragments/employee-sidebar :: sidebar">
+    </div>
+    
+    <div id="wrapper">
+        
+        <!--Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 th:if="${newAppSched.status == 'pending'}">Schedule an Inspection</h1>
+                        <h1 th:if="${newAppSched.status == 'inspecting'}">Change Schedule</h1>
+                        <p><i>Fields marked with * are required Fields</i></p>
+                            <div class="panel panel-info"> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title"></h3>
+                        </div>
+                        <div class="panel-body">
+                            <div align="center" th:if="${success != null}">
+                                <p style="font-size: 20; color: #FF1C19;">Scheduling successful.</p>
+                            </div>
+
+                        <form class="form-horizontal" th:action="@{/change-schedule}" th:object="${newAppSched}" method="POST">
+                            <input type="hidden" th:field="*{id}" th:value="${newAppSched.id}"/>
+                            <input type="hidden" th:field="*{applicantName}" th:value="${newAppSched.applicantName}"/>
+                            <input type="hidden" th:field="*{applicationDate}" th:value="${newAppSched.applicationDate}"/>
+                            <input type="hidden" th:field="*{bpldId}" th:value="${newAppSched.bpldId}"/>
+                            <input type="hidden" th:field="*{status}" th:value="${newAppSched.status}"/>
+                            <input type="hidden" th:field="*{email}" th:value="${newAppSched.email}"/>
+                            <input type="hidden" th:field="*{taxYear}" th:value="${newAppSched.taxYear}"/>
+                            <input type="hidden" th:field="*{applicationType}" th:value="${newAppSched.applicationType}"/>
+                            <input type="hidden" th:field="*{referenceNumber}" th:value="${newAppSched.referenceNumber}"/>
+                            <input type="hidden" th:field="*{registrationNumber}" th:value="${newAppSched.registrationNumber}"/>
+                            <input type="hidden" th:field="*{businessName}" th:value="${newAppSched.businessName}"/>
+                            <input type="hidden" th:field="*{encodedDate}" th:value="${newAppSched.encodedDate}"/>
+                            <input type="hidden" th:field="*{registrationDate}" th:value="${newAppSched.registrationDate}"/>
+                            <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
+
+                                <div class="form-group">
+                                    <label for="inspectors" class="col-sm-2 control-label">Select Inspector:*</label>
+                                    <div class="col-sm-10">
+                                        <select th:field="*{inspectorId}" class="form-control" name="inspectors" id="inspectors">
+                                            <option th:each="inspector: ${inspectors}" th:value="${inspector.userId}" th:text="${inspector.firstName} + ' ' + ${inspector.lastName}"></option>
+                                        </select></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="time" class="col-sm-2 control-label">Time:*</label>
+                                    <div class="col-sm-10">
+                                        <input type="time" class="form-control" id="time" name="time" required="" th:field="*{inspectionTime}" th:value="${newAppSched.inspectionTime}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="date" class="col-sm-2 control-label">Date:*</label>
+                                    <div class="col-sm-10">
+                                        <input type="date" class="form-control" id="date" name="date" required="" th:field="*{inspectionDate}" th:value="${newAppSched.inspectionDate}"/>
+                                    </div>
+                                </div>
+                            <h5>Business Address:</h5>
+                                <div class="form-group">
+                                    <label for="unit" class="col-sm-2 control-label">Unit Number:</label>
+                                    <div class="col-sm-10">
+                                        <input type="number" class="form-control" id="unit" name="unit" th:field="*{unitNumber}" th:value="${newAppSched.unitNumber}"/>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="street" class="col-sm-2 control-label">Street:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="street" name="street" th:field="*{street}" th:value="${newAppSched.street}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="barangay" class="col-sm-2 control-label">Barangay:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="barangay" name="barangay" th:field="*{barangay}" th:value="${newAppSched.barangay}"/>
+                                    </div>
+                                </div>
+                                 <div class="form-group">
+                                    <label for="subdivision" class="col-sm-2 control-label">Subdivision:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="subdivision" name="subdivision" th:field="*{subdivision}" th:value="${newAppSched.subdivision}"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city" class="col-sm-2 control-label">City/Municipality:</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="city" name="city" th:field="*{city}" th:value="${newAppSched.city}"/>
+                                    </div>
+                                </div>
+                                
+                                <p align="center">
+                                    <button type="submit" class="btn btn-primary">Change Schedule</button>
+                                </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+   
+    
+</body>    
+    
+</html>

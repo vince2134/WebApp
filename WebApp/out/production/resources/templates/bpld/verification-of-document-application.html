@@ -1,0 +1,308 @@
+<html lang="en">
+    
+<head>
+    
+     <title>Compute Fee</title>    
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">    
+    
+    <style>
+        
+        #sidebar-wrapper{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;   
+            
+        }
+        
+        #page-content-wrapper{
+            margin-left: 250px;   
+        }
+        
+        
+        .sidebar-nav{
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li{
+            text-indent: 20px;
+            line-height: 40px;
+            
+        }
+        
+        .sidebar-nav li a{
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+            
+        }
+        
+        .sidebar-nav li a:hover{
+            background: gray;
+        }
+        
+        .navbar-text{
+            font-size: 20px;
+            color: black;
+        }
+        
+        .navbar{
+            padding-top: 5px;
+            padding-bottom: 5px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+        
+        #subcategories{
+            text-indent: 50px;
+            font-size: 15px;
+        }
+        
+        #h2-sidebar{
+            color: white;
+            padding: 20px;
+        }
+        
+        #p-sidebar{
+            color: white;
+        }
+        
+        #modules{
+            font-size: 18px;
+        }
+        
+        .panel-info, .panel-default{
+            margin-top: 30px;
+        }
+        
+        h1{
+            font-family: 'Roboto', sans-serif;
+        }
+        
+         textarea{
+          width: 80%;
+          margin-left: 10%;  
+        }
+         h5{
+            margin-left: 10%;
+        }
+    </style>
+    
+</head>
+    
+<body>
+    
+    <!-- nav bar -->
+    
+    <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <ul class="nav navbar-nav">
+                <p class="navbar-text"><b>MCHBPLD</b></p>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">   
+              <li><a href="#"><span class="glyphicon glyphicon glyphicon-bell"></span> Notifications</a></li>    
+              <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Log Out</a></li>
+            </ul>
+          </div>
+    </nav>
+    
+    
+    <div id="wrapper">
+        
+        <!--Side bar -->
+        <div id="sidebar-wrapper">
+            
+            <h2 id="h2-sidebar" class="text-center"><b>Engineering Department</b></h2>
+            <p id="p-sidebar" class="text-center">Hi User!</p>
+            
+            <ul class ="sidebar-nav">
+                
+                <li><a href="#" id="modules">Track an application</a></li>
+                <li id="modules"><a href="#applications" data-toggle="collapse">Applications</a></li>
+                    <div id="applications" class="collapse">
+                        <li><a href="#" id="subcategories">New Applications</a></li>
+                        <li><a href="#" id="subcategories">In process</a></li>
+                        <li><a href="#" id="subcategories">Renewal</a></li>
+                        <li><a href="#" id="subcategories">Compute Fees</a></li>
+                    </div>
+                <li id="modules"><a href="#">Records</a></li>
+                <li id="modules"><a href="#inspection" data-toggle="collapse">Inspections</a></li>
+                    <div id="inspection" class="collapse">
+                         <li><a href="#" id="subcategories">Schedule</a></li>
+                        <li><a href="#" id="subcategories">Schedule new inspection</a></li>
+                        <li><a href="#" id="subcategories">Change Schedule</a></li>
+                    </div>
+                <li id="modules"><a href="#">Report an Employee</a></li>
+            </ul>
+        </div>
+        
+        <!--Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1>Verify Documents</h1>
+                        
+                   <div class="panel panel-default"> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Compute Fees for:</h3>
+                        </div>
+                        <div class="panel-body">
+                             <table class="table table-responsive table-hover">
+
+                                <thead>
+                                  <tr>
+                                    <th>Applicant Name</th>
+                                    <th>Application No.</th>
+                                    <th>Business Name</th>
+                                    <th>Business Address</th>
+                                    <th>Applicant Email Address</th>  
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                  <tr>
+
+                                    <td>Clark Kent</td>
+                                    <td>839284</td>
+                                    <td>Smallville Motors</td>
+                                    <td>Mandaluyong</td>  
+                                    <td>clarkkent@gmail.com</td>  
+                            
+                                  </tr>
+                                    
+                                </tbody> 
+
+                            </table>
+                        </div>    
+                    </div>
+                   
+                        
+                         <div class="panel panel-success"> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Verification of Documents</h3>
+                        </div>
+                        <div class="panel-body">
+                             <table class="table table-responsive table-hover">
+
+                                <thead>
+                                  <tr>
+                                    <th>Description</th>
+                                    <th>Office/Agency</th>
+                                    <th>Date Issued</th>
+                                    <th>Verified By:</th>
+                                    
+                                  </tr>
+                                </thead>
+
+                                <tbody>
+                                    
+                                   <tr>
+                                        <td>Renewed Barangay Business Clearance</td>
+                                        <td>Barangay</td>
+                                        <td>Date Picker</td>
+                                        <td>Insert field here</td>
+                                   </tr>   
+                                    
+                                    <tr>
+                                        <td>VAT Returns from BIR</td>
+                                        <td>BIR</td>
+                                        <td>Date Picker</td>
+                                        <td>Insert field here</td>
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Previous Business Permit</td>
+                                        <td>None</td>
+                                        <td>Date Picker</td>
+                                        <td>Insert field here</td>
+                                    </tr>    
+                                      
+                                    <tr>
+                                        <td>Financial Statement from accountant</td>
+                                        <td>None</td>
+                                        <td>Date Picker</td>
+                                        <td>Insert field here</td>
+                                    </tr> 
+                                    
+                                    <tr>
+                                        <td>Others please Specify:</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>  
+                                    </tr>
+                                    
+                                    <tr>
+                                        <td>Insert field here</td>
+                                        <td>Insert field here</td>
+                                        <td>Date Picker</td>
+                                        <td>Insert field here</td>
+                                    </tr>
+                                    
+                                    
+                                    <tr>
+                                        <td>Insert field here</td>
+                                        <td>Insert field here</td>
+                                        <td>Date Picker</td>
+                                        <td>Insert field here</td>
+                                    </tr>    
+                                      
+                                    <tr>
+                                        <td>Insert field here</td>
+                                        <td>Insert field here</td>
+                                        <td>Date Picker</td>
+                                        <td>Insert field here</td>
+                                    </tr>    
+                                    
+                                     <tr>
+                                        <td>Insert field here</td>
+                                        <td>Insert field here</td>
+                                        <td>Date Picker</td>
+                                        <td>Insert field here</td>
+                                     </tr> 
+                                 
+                                    
+                                </tbody> 
+
+                            </table>
+                        </div>    
+                    </div>
+                        
+                        <p align="center">
+                                    <button type="submit" class="btn btn-warning">Hold</button> <button type="submit" class="btn btn-success">Done</button>
+                        </p>
+                        
+                         
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+            
+    </div>
+    
+    
+    
+   
+    
+</body>    
+    
+</html>

@@ -1,0 +1,413 @@
+<html xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+    
+     <title>Approve Application</title>    
+    
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    <style>
+        
+       #sidebar-wrapper{
+            position: absolute;
+            width: 250px;
+            height: 100%;
+            overflow-y: hidden;
+            background: #474e5d;   
+            
+        }
+        
+        #page-content-wrapper{
+           
+            margin-left: 250px;   
+        }
+       
+        .sidebar-nav{
+            padding: 0;
+            list-style: none;
+        }
+        
+        .sidebar-nav li{
+            text-indent: 20px;
+            line-height: 40px;
+            
+        }
+        
+        .sidebar-nav li a{
+            display: block;
+            text-decoration: none;
+            color: lightgray;
+            
+        }
+        
+        .sidebar-nav li a:hover{
+            background: gray;
+        }
+        
+        #menu-toggle{
+           padding-top: 50px;
+        }
+        
+        .navbar-text{
+            font-size: 20px;
+        }
+        
+        .navbar{
+            padding-top: 10px;
+            padding-bottom: 10px;
+            border: 0;
+            border-radius: 0;
+            margin-bottom: 0;
+        }
+        
+        .navbar-nav li a:hover {
+            color: #1abc9c !important;
+        }
+        
+        #subcategories{
+            text-indent: 50px;
+            font-size: 15px;
+        }
+        
+        #h2-sidebar{
+            color: white;
+            padding: 20px;
+        }
+        
+        #p-sidebar{
+            color: white;
+        }
+        
+        #modules{
+            font-size: 18px;
+        }
+        
+         .panel-primary{
+            margin-top: 30px;
+        }
+        
+        .progress{
+            margin-top: 20px;
+            margin-left: 15%;
+            width: 70%;
+        }
+        
+        h3{
+            text-align: center;
+        }
+        
+        
+        
+    </style>
+    
+</head>
+    
+<body>
+
+<div th:replace="fragments/header :: header">
+</div>
+
+    <div th:replace="fragments/chief-sidebar :: sidebar">
+    </div>
+    
+    <div id="wrapper">
+        
+        <!--Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-primary">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Application Details</h3>
+                        </div>
+
+                        <div class="panel-body">
+                           <div class="table-responsive">
+                            <table class="table">
+                                <tr>
+                                    <td><div class="form-group">
+                                            <label class="col-sm-6 control-label">Application Number (Reference Number):</label>
+                                            <div class="col-sm-6">
+                                                <p class="form-control-static" th:text="${app.referenceNumber}"></p>
+                                            </div>
+                                        </div></td>
+                                </tr>
+                                 <tr>
+                                    <td><div class="form-group">
+                                            <label class="col-sm-6 control-label">Applicant Name:</label>
+                                            <div class="col-sm-6">
+                                                <p class="form-control-static" th:text="${app.applicantName}"></p>
+                                            </div>
+                                        </div></td>
+                                </tr>
+                                 <tr>
+                                    <td><div class="form-group">
+                                            <label class="col-sm-6 control-label">Business Address:</label>
+                                            <div class="col-sm-6">
+                                                <p class="form-control-static" th:text="${app.city}"></p>
+                                            </div>
+                                        </div></td>
+                                </tr>
+                                 <tr>
+                                    <td><div class="form-group">
+                                            <label class="col-sm-6 control-label">Business Name:</label>
+                                            <div class="col-sm-6">
+                                                <p class="form-control-static" th:text="${app.businessName}"></p>
+                                            </div>
+                                        </div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="form-group">
+                                            <label class="col-sm-6 control-label">Type of Application:</label>
+                                            <div class="col-sm-6">
+                                                <p class="form-control-static" th:text="${app.applicationType}"></p>
+                                            </div>
+                                        </div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="form-group">
+                                            <label class="col-sm-6 control-label">Date of Application:</label>
+                                            <div class="col-sm-6">
+                                                <p class="form-control-static" th:text="${app.applicationDate}"></p>
+                                            </div>
+                                        </div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="form-group">
+                                            <label class="col-sm-6 control-label">DTI/SEC/CDA Registration No:</label>
+                                            <div class="col-sm-6">
+                                                <p class="form-control-static" th:text="${app.registrationNumber}"></p>
+                                            </div>
+                                        </div></td>
+                                </tr>
+                                <tr>
+                                    <td><div class="form-group">
+                                            <label class="col-sm-6 control-label">DTI/SEC/CDA Registration Date:</label>
+                                            <div class="col-sm-6">
+                                                <p class="form-control-static" th:text="${#dates.format(app.registrationDate, 'dd-MMM-yyyy')}"></p>
+                                            </div>
+                                        </div></td>
+                                </tr>
+                            </table>
+                        </div>
+                     </div>
+                        </div>
+                        
+                        
+                        <div class="panel panel-danger">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Application Fees</h3>
+                        </div>
+                            <h3 th:if="${4 > app.step}">Fees not yet available.</h3>
+
+                            <div class="panel-body" th:if="${app.step > 3}">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Local Business Tax:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.localBusinessTax}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Tax on Delivery vans/trucks:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.taxOnDelivery}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Tax on Storage for flammable substance:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.taxOnStorage}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Tax on signboard/billboards:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.taxOnSignboard}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Mayor's Permit Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.mayorPermit}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Garbage Charges:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.garbageCharges}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Delivery Trucks/Vans Permit Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.deliveryPermit}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Sanitary Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.sanitaryInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Building Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.buildingInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Electrical Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.electricalInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Mechanical Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.mechanicalInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Plumbing Inspection Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.plumbingInspection}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Signboard/BillBoard Renewal Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.signboardRenewal}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Signboard/BillBoard Permit Fee:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.signboardPermit}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                        <tr>
+                                            <td><div class="form-group">
+                                                <label class="col-sm-6 control-label">Storage and sale of flammable substance:</label>
+                                                <div class="col-sm-6">
+                                                    <p class="form-control-static" th:text="${fees.storageFlam}"></p>
+                                                </div>
+                                            </div></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        
+                        <div class="panel panel-danger"> 
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Assessed by:</h3>
+                        </div>
+                        <div class="panel-body">
+                             <table class="table table-responsive table-hover">
+
+                                <thead>
+                                  <tr>
+                                    <th>Employee Name</th>
+                                    <th>Employee Department</th>
+                                    <th>Date</th>
+                                  </tr>
+                                </thead>
+
+                                 <tbody>
+                                 <tr>
+
+                                     <td th:text="${bpldAssess.firstName} + ' ' + ${bpldAssess.lastName}"></td>
+                                     <td th:text="${bpldAssess.department}"></td>
+                                     <td th:text="${#dates.format(app.assessBpldDate, 'dd-MMM-yyyy')}"></td>
+
+                                 </tr>
+
+                                 <tr>
+
+                                     <td th:text="${engAssess.firstName} + ' ' + ${engAssess.lastName}"></td>
+                                     <td th:text="${engAssess.department}"></td>
+                                     <td th:text="${#dates.format(app.assessEngDate, 'dd-MMM-yyyy')}"></td>
+
+                                 </tr>
+
+                                 </tbody>
+
+                             </table>
+                             
+                        </div>    
+                    </div>
+                        
+                         <div class="panel panel-default">
+
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Remarks</h3>
+                        </div>
+                            <h3 th:if="${fees.remarks != null}" th:text="${fees.remarks}"></h3>
+                             <h3 th:if="${fees.remarks.isEmpty()}">No Remarks</h3>
+                        </div>
+                        
+                        <p align="center">
+                            <form class="form-horizontal" th:action="@{/approve-application}" method="POST">
+                                <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
+                                <button type="submit" class="btn btn-success" th:if="${app.step != 6}" th:name="appId" th:value="${app.id}">Approve</button>
+                            </form>
+                        </p>
+                            <p align="center">
+                            <form class="form-horizontal" th:action="@{/disapprove-application}" method="POST">
+                                <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
+                                <button type="submit" class="btn btn-danger" th:if="${app.step != 6}" th:name="appId" th:value="${app.id}">Disapprove</button>
+                            </form>
+                            </p>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+</body>    
+    
+</html>

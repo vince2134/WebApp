@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+    <!--Side bar -->
+    <div id="sidebar-wrapper" th:fragment="sidebar">
+
+        <h2 id="h2-sidebar" class="text-center"><b>Business Permit and Licensing Department</b></h2>
+        <p id="p-sidebar" class="text-center" th:text="Hi + ' ' + ${currentUser.firstName} + '!'"></p>
+
+        <ul class ="sidebar-nav">
+            <li id="modules"><a th:href="@{bpld-home(curUserId=${currentUser.userId})}">Home</a></li>
+            <li id="modules"><a th:href="@{enter-application(curUserId=${currentUser.userId})}">Track an Application</a></li>
+            <li id="modules"><a th:href="@{encode(curUserId=${currentUser.userId})}">Encode Document</a></li>
+            <li id="modules"><a href="#applications" data-toggle="collapse">Applications</a></li>
+            <div id="applications" class="collapse">
+                <li><a th:href="@{bpld-home-processing(curUserId=${currentUser.userId})}" id="subcategories">In Process</a></li>
+                <li><a href="#" id="subcategories">Renewal</a></li>
+                <li><a th:href="@{choose-to-compute-fee-bpld(curUserId=${currentUser.userId})}" id="subcategories">Compute Fees</a></li>
+            </div>
+            <li id="modules"><a th:href="@{record-list-bpld(curUserId=${currentUser.userId})}">Records</a></li>
+            <li id="modules"><a th:href="@{report-employee-bpld(curUserId=${currentUser.userId})}">Report an Employee</a></li>
+        </ul>
+    </div>
+
+</body>
+</html>
