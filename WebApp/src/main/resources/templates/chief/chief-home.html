@@ -168,7 +168,7 @@
                                         <td th:text="${app.businessName}"></td>
                                         <td th:text="${app.city}"></td>
                                         <td th:text="${app.email}"></td>
-                                        <form id="edit-employee" class="form-horizontal" th:action="@{/approve-application}" method="POST">
+                                        <form id="edit-employee" class="form-horizontal" th:action="@{/approve-application}" method="GET">
                                             <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
                                             <td th:if="${app.step == 6}"><button type="submit" class="btn btn-warning" th:name="appId" th:value="${app.id}">View For Approval</button></td>
                                         </form>

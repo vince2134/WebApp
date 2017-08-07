@@ -45,7 +45,7 @@ public class EngineeringController {
         User user = userService.findUserByUserId(curUserId);
 
         modelAndView.addObject("currentUser", user);
-        modelAndView.addObject("applications", applicationService.getPendingApplications());
+        modelAndView.addObject("applications", applicationService.getStep2Applications());
 
         return modelAndView;
     }
@@ -143,7 +143,8 @@ public class EngineeringController {
 
 
         scheduledApplication.setStep(3);
-        scheduledApplication.setStatus("inspecting");
+        if(!scheduledApplication.getStatus().equalsIgnoreCase("renewal"))
+            scheduledApplication.setStatus("inspecting");
         scheduledApplication.setInspectorName(userService.findUserByUserId(scheduledApplication.getInspectorId()).getFirstName() + userService.findUserByUserId(scheduledApplication.getInspectorId()).getLastName());
 
         applicationService.createNewApplication(scheduledApplication);

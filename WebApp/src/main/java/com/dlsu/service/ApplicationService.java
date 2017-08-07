@@ -27,6 +27,14 @@ public class ApplicationService {
         return applicationRepository.findPendingApplications();
     }
 
+    public ArrayList<BPApplication> getStep1Applications(){
+        return applicationRepository.findStep1Applications();
+    }
+
+    public ArrayList<BPApplication> getStep2Applications(){
+        return applicationRepository.findStep2Applications();
+    }
+
     public ArrayList<BPApplication> getApplicationsByInspectorId(Integer id){
         return applicationRepository.findByInspectorId(id);
     }

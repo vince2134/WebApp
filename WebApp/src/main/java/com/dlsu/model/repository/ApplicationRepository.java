@@ -27,6 +27,18 @@ public interface ApplicationRepository extends CrudRepository<BPApplication, Int
 
     @Query("SELECT a " +
             "from BPApplication a " +
+            "where a.step = 1 " +
+            "order by a.applicationDate desc ")
+    ArrayList<BPApplication> findStep1Applications();
+
+    @Query("SELECT a " +
+            "from BPApplication a " +
+            "where a.step = 2 " +
+            "order by a.applicationDate desc ")
+    ArrayList<BPApplication> findStep2Applications();
+
+    @Query("SELECT a " +
+            "from BPApplication a " +
             "where a.step > 1 AND a.step <> 7" +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> findProcessingApplications();

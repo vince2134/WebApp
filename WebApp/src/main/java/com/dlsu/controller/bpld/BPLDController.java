@@ -45,7 +45,7 @@ public class BPLDController {
         User user = userService.findUserByUserId(curUserId);
 
         modelAndView.addObject("currentUser", user);
-        modelAndView.addObject("applications", applicationService.getPendingApplications());
+        modelAndView.addObject("applications", applicationService.getStep1Applications());
 
         return modelAndView;
     }
@@ -389,6 +389,38 @@ public class BPLDController {
         applicationService.createNewApplication(app);
 
         modelAndView.addObject("verified", "verified");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/renewal"}, method = RequestMethod.GET)
+    public ModelAndView renewal(@RequestParam("curUserId") Integer curUserId, @RequestParam("appId") Integer appId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/bpld/renewal");
+
+        User user = userService.findUserByUserId(curUserId);
+        BPApplication app = applicationService.findByIdNumber(appId);
+
+        modelAndView.addObject("currentUser", user);
+        modelAndView.addObject("app", app);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/renew"}, method = RequestMethod.POST)
+    public ModelAndView renew(@RequestParam("curUserId") Integer curUserId, BPApplication app) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/bpld/renewal");
+
+        app.setStep(1);
+        app.setStatus("renewal");
+        applicationService.createNewApplication(app);
+
+        User user = userService.findUserByUserId(curUserId);
+
+        modelAndView.addObject("currentUser", user);
+        modelAndView.addObject("app", app);
+        modelAndView.addObject("success", "success");
 
         return modelAndView;
     }

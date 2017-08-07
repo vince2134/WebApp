@@ -26,7 +26,6 @@
             <li id="modules"><a href="#applications" data-toggle="collapse">Applications</a></li>
             <div id="applications" class="collapse">
                 <li><a th:href="@{engineering-home-processing(curUserId=${currentUser.userId})}" id="subcategories">In Process</a></li>
-                <li><a href="#" id="subcategories">Renewal</a></li>
                 <li><a th:href="@{choose-to-compute-fee(curUserId=${currentUser.userId})}" id="subcategories">Compute Fees</a></li>
             </div>
             <li id="modules"><a th:href="@{record-list-engineering(curUserId=${currentUser.userId})}">Records</a></li>

@@ -25,7 +25,6 @@
             <li id="modules"><a href="#applications" data-toggle="collapse">Applications</a></li>
             <div id="applications" class="collapse">
                 <li><a th:href="@{inspector-home-processing(curUserId=${currentUser.userId})}" id="subcategories">In Process</a></li>
-                <li><a href="#" id="subcategories">Renewal</a></li>
             </div>
             <li id="modules"><a th:href="@{record-list-inspector(curUserId=${currentUser.userId})}">Records</a></li>
             <li id="modules"><a th:href="@{schedule-list-inspector(curUserId=${currentUser.userId})}">Inspections</a></li>

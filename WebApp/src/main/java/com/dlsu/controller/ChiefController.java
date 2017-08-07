@@ -441,4 +441,36 @@ public class ChiefController {
 
         return modelAndView;
     }
+
+    @RequestMapping(value = {"/renewal-chief"}, method = RequestMethod.GET)
+    public ModelAndView renewal(@RequestParam("curUserId") Integer curUserId, @RequestParam("appId") Integer appId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/chief/renewal");
+
+        User user = userService.findUserByUserId(curUserId);
+        BPApplication app = applicationService.findByIdNumber(appId);
+
+        modelAndView.addObject("currentUser", user);
+        modelAndView.addObject("app", app);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/renew-chief"}, method = RequestMethod.POST)
+    public ModelAndView renew(@RequestParam("curUserId") Integer curUserId, BPApplication app) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/chief/renewal");
+
+        app.setStep(1);
+        app.setStatus("renewal");
+        applicationService.createNewApplication(app);
+
+        User user = userService.findUserByUserId(curUserId);
+
+        modelAndView.addObject("currentUser", user);
+        modelAndView.addObject("app", app);
+        modelAndView.addObject("success", "success");
+
+        return modelAndView;
+    }
 }

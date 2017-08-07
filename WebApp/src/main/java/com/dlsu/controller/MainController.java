@@ -37,11 +37,11 @@ public class MainController {
                 modelAndView.setViewName("/admin/admin-home");
             }
             else if(user.getDepartment().equalsIgnoreCase("bpld")){
-                modelAndView.addObject("applications", applicationService.getPendingApplications());
+                modelAndView.addObject("applications", applicationService.getStep1Applications());
                 modelAndView.setViewName("/bpld/bpld-home");
             }
             else if(user.getDepartment().equalsIgnoreCase("engineering - employee")){
-                modelAndView.addObject("applications", applicationService.getPendingApplications());
+                modelAndView.addObject("applications", applicationService.getStep2Applications());
                 modelAndView.setViewName("/engineering/employee/engineering-home");
             }
             else if(user.getDepartment().equalsIgnoreCase("engineering - inspector")){
