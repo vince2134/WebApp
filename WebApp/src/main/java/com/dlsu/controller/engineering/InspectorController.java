@@ -73,7 +73,11 @@ public class InspectorController {
 
         if(applicationService.findByReferenceNumber(referenceNumber) != null) {
             modelAndView.addObject("success", "success");
+            Fees fees = feesService.findByAppId(applicationService.findByReferenceNumber(referenceNumber).getId());
             modelAndView.addObject("currentApplication", applicationService.findByReferenceNumber(referenceNumber));
+            if(fees != null)
+                modelAndView.addObject("total", fees.getTotal());
+            modelAndView.addObject("fees", fees);
             modelAndView.setViewName("/engineering/inspector/view-application");
         }
         else {

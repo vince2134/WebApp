@@ -393,18 +393,16 @@
                              <h3 th:if="${fees.remarks.isEmpty()}">No Remarks</h3>
                         </div>
                         
-                        <p align="center">
+                        <div align="center">
                             <form class="form-horizontal" th:action="@{/approve-application}" method="POST">
                                 <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
                                 <button type="submit" class="btn btn-success" th:if="${app.step != 7}" th:name="appId" th:value="${app.id}">Approve</button>
                             </form>
-                        </p>
-                            <p align="center">
                             <form class="form-horizontal" th:action="@{/disapprove-application}" method="POST">
                                 <input type="hidden" th:name="curUserId" th:value="${currentUser.userId}"/>
                                 <button type="submit" class="btn btn-danger" th:if="${app.step != 7}" th:name="appId" th:value="${app.id}">Disapprove</button>
                             </form>
-                            </p>
+                        </div>
                     </div>
                     </div>
                 </div>

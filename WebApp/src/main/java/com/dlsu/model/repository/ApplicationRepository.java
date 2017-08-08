@@ -75,7 +75,7 @@ public interface ApplicationRepository extends CrudRepository<BPApplication, Int
 
     @Query("SELECT a " +
             "from BPApplication a " +
-            "where a.step = 7 or a.status = 'renewal' " +
+            "where a.step = 7 or a.status = 'renewal' or a.status = 'retirement' " +
             "order by a.applicationDate desc ")
     ArrayList<BPApplication> getApprovedApplications();
 

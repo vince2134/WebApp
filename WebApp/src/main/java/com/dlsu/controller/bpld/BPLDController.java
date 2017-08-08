@@ -123,7 +123,11 @@ public class BPLDController {
 
         if(applicationService.findByReferenceNumber(referenceNumber) != null) {
             modelAndView.addObject("success", "success");
+            Fees fees = feesService.findByAppId(applicationService.findByReferenceNumber(referenceNumber).getId());
             modelAndView.addObject("currentApplication", applicationService.findByReferenceNumber(referenceNumber));
+            if(fees != null)
+                modelAndView.addObject("total", fees.getTotal());
+            modelAndView.addObject("fees", fees);
             modelAndView.setViewName("/bpld/view-application");
         }
         else {
@@ -313,7 +317,10 @@ public class BPLDController {
     @RequestMapping(value = {"/verification-of-document-application"}, method = RequestMethod.POST)
     public ModelAndView verificationDone(@RequestParam("curUserId") Integer curUserId, @RequestParam("appId") Integer appId, Fees fees) {
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("/bpld/verification-of-document-application");
+        if(applicationService.findByIdNumber(appId).getStep() == 7)
+            modelAndView.setViewName("/bpld/retirement");
+        else
+            modelAndView.setViewName("/bpld/verification-of-document-application");
 
         User user = userService.findUserByUserId(curUserId);
 
@@ -420,6 +427,47 @@ public class BPLDController {
 
         modelAndView.addObject("currentUser", user);
         modelAndView.addObject("app", app);
+        modelAndView.addObject("success", "success");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/retirement"}, method = RequestMethod.GET)
+    public ModelAndView retirement(@RequestParam("curUserId") Integer curUserId, @RequestParam("appId") Integer appId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/bpld/retirement");
+
+        User user = userService.findUserByUserId(curUserId);
+        Fees fees = feesService.findByAppId(appId);
+        BPApplication app = applicationService.findByIdNumber(appId);
+        applicationService.createNewApplication(app);
+
+        modelAndView.addObject("currentUser", user);
+        modelAndView.addObject("app", app);
+        modelAndView.addObject("fees", fees);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/retire"}, method = RequestMethod.POST)
+    public ModelAndView retire(@RequestParam("curUserId") Integer curUserId, @RequestParam("appId") Integer appId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/bpld/retirement");
+
+        BPApplication app = applicationService.findByIdNumber(appId);
+
+        app.setStep(4);
+        app.setAssessBpld(null);
+        app.setAssessEng(null);
+        app.setStatus("retirement");
+        applicationService.createNewApplication(app);
+
+        User user = userService.findUserByUserId(curUserId);
+        Fees fees = feesService.findByAppId(app.getId());
+
+        modelAndView.addObject("currentUser", user);
+        modelAndView.addObject("app", app);
+        modelAndView.addObject("fees", fees);
         modelAndView.addObject("success", "success");
 
         return modelAndView;

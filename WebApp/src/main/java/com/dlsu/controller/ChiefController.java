@@ -70,7 +70,11 @@ public class ChiefController {
 
         if(applicationService.findByReferenceNumber(referenceNumber) != null) {
             modelAndView.addObject("success", "success");
+            Fees fees = feesService.findByAppId(applicationService.findByReferenceNumber(referenceNumber).getId());
             modelAndView.addObject("currentApplication", applicationService.findByReferenceNumber(referenceNumber));
+            if(fees != null)
+                modelAndView.addObject("total", fees.getTotal());
+            modelAndView.addObject("fees", fees);
             modelAndView.setViewName("/chief/view-application");
         }
         else {
@@ -469,6 +473,106 @@ public class ChiefController {
 
         modelAndView.addObject("currentUser", user);
         modelAndView.addObject("app", app);
+        modelAndView.addObject("success", "success");
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/verification-of-document-application-chief"}, method = RequestMethod.POST)
+    public ModelAndView verificationDone(@RequestParam("curUserId") Integer curUserId, @RequestParam("appId") Integer appId, Fees fees) {
+        ModelAndView modelAndView = new ModelAndView();
+
+        modelAndView.setViewName("/chief/retirement");
+
+        User user = userService.findUserByUserId(curUserId);
+
+        if(fees.getOthers1Date().isEmpty())
+            fees.setOthers1Date(null);
+        if(fees.getOthers2Date().isEmpty())
+            fees.setOthers2Date(null);
+        if(fees.getOthers3Date().isEmpty())
+            fees.setOthers3Date(null);
+        if(fees.getOthers4Date().isEmpty())
+            fees.setOthers4Date(null);
+        if(fees.getBarangayClearanceVerifier().isEmpty())
+            fees.setBarangayClearanceVerifier(null);
+        if(fees.getLocationClearanceVerifier().isEmpty())
+            fees.setLocationClearanceVerifier(null);
+        if(fees.getHealthClearanceVerifier().isEmpty())
+            fees.setHealthClearanceVerifier(null);
+        if(fees.getOccupancyPermitVerifier().isEmpty())
+            fees.setOccupancyPermitVerifier(null);
+        if(fees.getFireSafetyClearanceVerifier().isEmpty())
+            fees.setFireSafetyClearanceVerifier(null);
+
+        if(fees.getBarangayClearanceDate() != null)
+            fees.setBarangayClearanceVerifier(user.getFirstName() + ' ' + user.getLastName());
+        if(fees.getHealthClearanceDate() != null)
+            fees.setHealthClearanceVerifier(user.getFirstName() + ' ' + user.getLastName());
+        if(fees.getLocationClearanceDate() != null)
+            fees.setLocationClearanceVerifier(user.getFirstName() + ' ' + user.getLastName());
+        if(fees.getFireSafetyClearanceDate() != null)
+            fees.setFireSafetyClearanceVerifier(user.getFirstName() + ' ' + user.getLastName());
+        if(fees.getOccupancyPermitDate() != null)
+            fees.setOccupancyPermitVerifier(user.getFirstName() + ' ' + user.getLastName());
+        if(fees.getOthers1Date() != null)
+            fees.setOthers1Verifier(user.getFirstName() + ' ' + user.getLastName());
+        if(fees.getOthers2Date() != null)
+            fees.setOthers2Verifier(user.getFirstName() + ' ' + user.getLastName());
+        if(fees.getOthers3Date() != null)
+            fees.setOthers3Verifier(user.getFirstName() + ' ' + user.getLastName());
+        if(fees.getOthers4Date() != null)
+            fees.setOthers4Verifier(user.getFirstName() + ' ' + user.getLastName());
+
+        feesService.saveFees(fees);
+
+        if(fees.verified())
+            modelAndView.addObject("readyToVerify", "readyToVerify");
+
+        modelAndView.addObject("fees", feesService.findByAppId(appId));
+        modelAndView.addObject("app", applicationService.findByIdNumber(appId));
+        modelAndView.addObject("success", "success");
+        modelAndView.addObject("currentUser", user);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/retirement-chief"}, method = RequestMethod.GET)
+    public ModelAndView retirement(@RequestParam("curUserId") Integer curUserId, @RequestParam("appId") Integer appId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/chief/retirement");
+
+        User user = userService.findUserByUserId(curUserId);
+        Fees fees = feesService.findByAppId(appId);
+        BPApplication app = applicationService.findByIdNumber(appId);
+        applicationService.createNewApplication(app);
+
+        modelAndView.addObject("currentUser", user);
+        modelAndView.addObject("app", app);
+        modelAndView.addObject("fees", fees);
+
+        return modelAndView;
+    }
+
+    @RequestMapping(value = {"/retire-chief"}, method = RequestMethod.POST)
+    public ModelAndView retire(@RequestParam("curUserId") Integer curUserId, @RequestParam("appId") Integer appId) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("/chief/retirement");
+
+        BPApplication app = applicationService.findByIdNumber(appId);
+
+        app.setStep(4);
+        app.setAssessBpld(null);
+        app.setAssessEng(null);
+        app.setStatus("retirement");
+        applicationService.createNewApplication(app);
+
+        User user = userService.findUserByUserId(curUserId);
+        Fees fees = feesService.findByAppId(app.getId());
+
+        modelAndView.addObject("currentUser", user);
+        modelAndView.addObject("app", app);
+        modelAndView.addObject("fees", fees);
         modelAndView.addObject("success", "success");
 
         return modelAndView;
