@@ -260,7 +260,7 @@
 
                                 </table>
 
-                                <tbody th:if="${currentApplication.step == 2}">
+                                <tbody th:if="${currentApplication.step lt 3}">
                                 <div align="center">
                                     <h3>No schedule yet</h3>
                                 </div>
@@ -340,7 +340,7 @@
                                             <td><div class="form-group">
                                                 <label class="col-sm-6 control-label">Locational Clearance Date:</label>
                                                 <div class="col-sm-6">
-                                                    <p class="form-control-static" th:text="${#dates.format(fees.locationClearanceDate, 'dd-MMM-yyyy')}"></p>
+                                                    <p class="form-control-static" th:if="${fees.locationClearanceDate != null}" th:text="${#dates.format(fees.locationClearanceDate, 'dd-MMM-yyyy')}"></p>
                                                 </div>
                                                 <label class="col-sm-6 control-label">Locational Clearance Verifier:</label>
                                                 <div class="col-sm-6">
@@ -352,7 +352,7 @@
                                             <td><div class="form-group">
                                                 <label class="col-sm-6 control-label">Sanitary/Health Clearance Date:</label>
                                                 <div class="col-sm-6">
-                                                    <p class="form-control-static" th:text="${#dates.format(fees.healthClearanceDate, 'dd-MMM-yyyy')}"></p>
+                                                    <p class="form-control-static" th:if="${fees.healthClearanceDate != null}" th:text="${#dates.format(fees.healthClearanceDate, 'dd-MMM-yyyy')}"></p>
                                                 </div>
                                                 <label class="col-sm-6 control-label">Sanitary/Health Clearance Verifier:</label>
                                                 <div class="col-sm-6">
@@ -364,7 +364,7 @@
                                             <td><div class="form-group">
                                                 <label class="col-sm-6 control-label">Occupancy Permit Date:</label>
                                                 <div class="col-sm-6">
-                                                    <p class="form-control-static" th:text="${#dates.format(fees.occupancyPermitDate, 'dd-MMM-yyyy')}"></p>
+                                                    <p class="form-control-static" th:if="${fees.occupancyPermitDate != null}" th:text="${#dates.format(fees.occupancyPermitDate, 'dd-MMM-yyyy')}"></p>
                                                 </div>
                                                 <label class="col-sm-6 control-label">Occupancy Permit Verifier:</label>
                                                 <div class="col-sm-6">
@@ -376,7 +376,7 @@
                                             <td><div class="form-group">
                                                 <label class="col-sm-6 control-label">Fire Safety Clearance Date:</label>
                                                 <div class="col-sm-6">
-                                                    <p class="form-control-static" th:text="${#dates.format(fees.fireSafetyClearanceDate, 'dd-MMM-yyyy')}"></p>
+                                                    <p class="form-control-static" th:if="${fees.fireSafetyClearanceDate != null}" th:text="${#dates.format(fees.fireSafetyClearanceDate, 'dd-MMM-yyyy')}"></p>
                                                 </div>
                                                 <label class="col-sm-6 control-label">Fire Safety Clearance Verifier:</label>
                                                 <div class="col-sm-6">

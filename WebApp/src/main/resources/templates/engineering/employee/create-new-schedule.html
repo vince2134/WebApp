@@ -1,4 +1,4 @@
-<html xmlns:th="http://www.thymeleaf.org">
+k<html xmlns:th="http://www.thymeleaf.org">
     
 <head>
     
@@ -136,11 +136,6 @@
                             <input type="hidden" th:field="*{bpldId}" th:value="${newAppSched.bpldId}"/>
                             <input type="hidden" th:field="*{status}" th:value="${newAppSched.status}"/>
                             <input type="hidden" th:field="*{email}" th:value="${newAppSched.email}"/>
-                            <input type="hidden" th:field="*{unitNumber}" th:value="${newAppSched.unitNumber}"/>
-                            <input type="hidden" th:field="*{street}" th:value="${newAppSched.street}"/>
-                            <input type="hidden" th:field="*{barangay}" th:value="${newAppSched.barangay}"/>
-                            <input type="hidden" th:field="*{subdivision}" th:value="${newAppSched.subdivision}"/>
-                            <input type="hidden" th:field="*{city}" th:value="${newAppSched.city}"/>
                             <input type="hidden" th:field="*{taxYear}" th:value="${newAppSched.taxYear}"/>
                             <input type="hidden" th:field="*{applicationType}" th:value="${newAppSched.applicationType}"/>
                             <input type="hidden" th:field="*{referenceNumber}" th:value="${newAppSched.referenceNumber}"/>
@@ -173,31 +168,31 @@
                                 <div class="form-group">
                                     <label for="unit" class="col-sm-2 control-label">Unit Number:</label>
                                     <div class="col-sm-10">
-                                        <input type="number" class="form-control" id="unit" name="unit" th:value="${newAppSched.unitNumber}"/>
+                                        <input type="number" class="form-control" id="unit" name="unit" th:value="${newAppSched.unitNumber}" th:field="*{unitNumber}"/>
                                     </div>
                                 </div>
                                  <div class="form-group">
                                     <label for="street" class="col-sm-2 control-label">Street:</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="street" name="street" th:value="${newAppSched.street}"/>
+                                        <input type="text" class="form-control" id="street" name="street" th:value="${newAppSched.street}" th:field="*{street}"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="barangay" class="col-sm-2 control-label">Barangay:</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="barangay" name="barangay" th:value="${newAppSched.barangay}"/>
+                                        <input type="text" class="form-control" id="barangay" name="barangay" th:value="${newAppSched.barangay}" th:field="*{barangay}"/>
                                     </div>
                                 </div>
                                  <div class="form-group">
                                     <label for="subdivision" class="col-sm-2 control-label">Subdivision:</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="subdivision" name="subdivision" th:value="${newAppSched.subdivision}"/>
+                                        <input type="text" class="form-control" id="subdivision" name="subdivision" th:value="${newAppSched.subdivision}" th:field="*{subdivision}"/>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="city" class="col-sm-2 control-label">City/Municipality:</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="city" name="city" th:value="${newAppSched.city}"/>
+                                        <input type="text" class="form-control" id="city" name="city" th:value="${newAppSched.city}" th:field="*{city}"/>
                                     </div>
                                 </div>
                                 

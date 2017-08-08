@@ -74,7 +74,8 @@ public class ChiefController {
             modelAndView.addObject("currentApplication", applicationService.findByReferenceNumber(referenceNumber));
             if(fees != null)
                 modelAndView.addObject("total", fees.getTotal());
-            modelAndView.addObject("fees", fees);
+            if(fees != null)
+                modelAndView.addObject("fees", fees);
             modelAndView.setViewName("/chief/view-application");
         }
         else {

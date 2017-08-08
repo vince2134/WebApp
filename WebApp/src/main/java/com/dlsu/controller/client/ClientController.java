@@ -53,7 +53,8 @@ public class ClientController {
 
             modelAndView.addObject("success", "success");
             modelAndView.addObject("currentApplication", app);
-            modelAndView.addObject("fees", fees);
+            if(fees != null)
+                modelAndView.addObject("fees", fees);
             if(fees != null)
                 modelAndView.addObject("total", fees.getTotal());
             modelAndView.setViewName("/client/client-home");
